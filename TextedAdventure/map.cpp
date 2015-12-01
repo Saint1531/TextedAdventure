@@ -10,20 +10,22 @@ enum en_DIRS { NORTH, EAST, SOUTH, WEST };
 enum en_ROOMS { SCIENCELAB, CLASSROOM202, START, HALLWAY1, CAFETERIA, 
 				HALLWAY2, STOREROOM, GYM, HALLWAY3, CLASSROOM206, JANIATORSCLOSET, 
 				HALLWAY4, HALLWAY5, HALLWAY6, HALLWAY7, HALLWAY8, HALLWAY9, HALLWAY10,
-				HALLWAY11, CLASSROOM301, CLASSROOM303, CLASSROOM305, CLASSROOM307, KITCHEN };
+				HALLWAY11, CLASSROOM301, CLASSROOM303, CLASSROOM305, CLASSROOM307, 
+				KITCHEN, PATHWAY };
 
 enum en_VERBS { GET, DROP, USE, OPEN, CLOSE, EXAMINE, INVENTORY, LOOK };
 
 //DOORS FOR QUESTIONS, OBJECTS FOR STORY
 enum en_NOUNS { JAN_CLOSET_DOOR,SCI_LAB_DOOR,CR202_DOOR,CAFETERIA_DOOR,KITCHEN_DOOR,SR_DOOR,
-				CR206_DOOR,CR307_DOOR,CR305_DOOR,CR301_DOOR,CR303_DOOR, MAGNET, METER, MONEY, TEXTBOOK };
+				CR206_DOOR,CR307_DOOR,CR305_DOOR,CR301_DOOR,CR303_DOOR, MAGNET, METER, MONEY, 
+				TEXTBOOK, DESK, GYM_DOOR};
 
 
 const int NONE = -1;//these will break everything if they're not right
 const int DIRS = 4;//like no errors
-const int ROOMS = 24;//but crashes
+const int ROOMS = 25;//but crashes
 const int VERBS = 8;
-const int NOUNS = 15;
+const int NOUNS = 17;
 
 //"struct" the things
 struct terms
@@ -54,126 +56,43 @@ struct noun
 void set_rooms(room *rms)
 {
 
-	//enum en_ROOMS { SCIENCELAB, CLASSROOM202, START, HALLWAY1, CAFETERIA, HALLWAY2, STOREROOM, GYM, HALLWAY3, CLASSROOM206, JANIATORSCLOSET, HALLWAY4, HALLWAY5, HALLWAY6, CLASSROOM301, CLASSROOM303, CLASSROOM305, CLASSROOM307 };
+	//enum en_ROOMS { SCIENCELAB, CLASSROOM202, START, HALLWAY1, CAFETERIA, HALLWAY2, STOREROOM, GYM, 
+	//HALLWAY3, CLASSROOM206, JANIATORSCLOSET, HALLWAY4, HALLWAY5, HALLWAY6, CLASSROOM301, CLASSROOM303, 
+	//CLASSROOM305, CLASSROOM307 };
+	rms[START].description.assign("School parking lot"); //Starting zone
+	rms[START].exits_to_room[NORTH] = NONE;
+	rms[START].exits_to_room[EAST] = NONE;
+	rms[START].exits_to_room[SOUTH] = PATHWAY;
+	rms[START].exits_to_room[WEST] = NONE;
+
+	rms[PATHWAY].description.assign("Pathway to the science lab"); //Starting zone
+	rms[PATHWAY].exits_to_room[NORTH] = START;
+	rms[PATHWAY].exits_to_room[EAST] = NONE;
+	rms[PATHWAY].exits_to_room[SOUTH] = NONE;
+	rms[PATHWAY].exits_to_room[WEST] = NONE;
+
 	rms[SCIENCELAB].description.assign("Science Lab 111");
 	rms[SCIENCELAB].exits_to_room[NORTH] = NONE;
 	rms[SCIENCELAB].exits_to_room[EAST] = NONE;
-	rms[SCIENCELAB].exits_to_room[SOUTH] = START;
+	rms[SCIENCELAB].exits_to_room[SOUTH] = HALLWAY1;
 	rms[SCIENCELAB].exits_to_room[WEST] = NONE;
 
 	rms[CLASSROOM202].description.assign("Classroom 202");
 	rms[CLASSROOM202].exits_to_room[NORTH] = NONE;
 	rms[CLASSROOM202].exits_to_room[EAST] = NONE;
 	rms[CLASSROOM202].exits_to_room[SOUTH] = NONE;
-	rms[CLASSROOM202].exits_to_room[WEST] = HALLWAY9;
-
-	rms[START].description.assign("Starting Zone/School parking lot"); //Starting zone
-	rms[START].exits_to_room[NORTH] = SCIENCELAB;
-	rms[START].exits_to_room[EAST] = HALLWAY1;
-	rms[START].exits_to_room[SOUTH] = NONE;
-	rms[START].exits_to_room[WEST] = NONE;
-
-	rms[HALLWAY1].description.assign("Hallway 1");
-	rms[HALLWAY1].exits_to_room[NORTH] = CLASSROOM202;
-	rms[HALLWAY1].exits_to_room[EAST] = CAFETERIA;
-	rms[HALLWAY1].exits_to_room[SOUTH] = HALLWAY2;
-	rms[HALLWAY1].exits_to_room[WEST] = START;
-
-	rms[CAFETERIA].description.assign("Cafateria");
-	rms[CAFETERIA].exits_to_room[NORTH] = NONE;
-	rms[CAFETERIA].exits_to_room[EAST] = NONE;
-	rms[CAFETERIA].exits_to_room[SOUTH] = NONE;
-	rms[CAFETERIA].exits_to_room[WEST] = HALLWAY1;
-
-	rms[HALLWAY2].description.assign("Hallway 2");
-	rms[HALLWAY2].exits_to_room[NORTH] = HALLWAY1;
-	rms[HALLWAY2].exits_to_room[EAST] = STOREROOM;
-	rms[HALLWAY2].exits_to_room[SOUTH] = HALLWAY3;
-	rms[HALLWAY2].exits_to_room[WEST] = NONE;
-
-	rms[STOREROOM].description.assign("School Store Room");
-	rms[STOREROOM].exits_to_room[NORTH] = NONE;
-	rms[STOREROOM].exits_to_room[EAST] = NONE;
-	rms[STOREROOM].exits_to_room[SOUTH] = NONE;
-	rms[STOREROOM].exits_to_room[WEST] = HALLWAY2;
-
-	rms[GYM].description.assign("Gym");
-	rms[GYM].exits_to_room[NORTH] = NONE;
-	rms[GYM].exits_to_room[EAST] = HALLWAY3;
-	rms[GYM].exits_to_room[SOUTH] = NONE;
-	rms[GYM].exits_to_room[WEST] = NONE;
-
-	rms[HALLWAY3].description.assign("Hallway 3");
-	rms[HALLWAY3].exits_to_room[NORTH] = HALLWAY2;
-	rms[HALLWAY3].exits_to_room[EAST] = CLASSROOM206;
-	rms[HALLWAY3].exits_to_room[SOUTH] = NONE;
-	rms[HALLWAY3].exits_to_room[WEST] = GYM;
+	rms[CLASSROOM202].exits_to_room[WEST] = HALLWAY2;
 
 	rms[CLASSROOM206].description.assign("Classroom 206");
-	rms[CLASSROOM206].exits_to_room[NORTH] = NONE;
+	rms[CLASSROOM206].exits_to_room[NORTH] = HALLWAY3;
 	rms[CLASSROOM206].exits_to_room[EAST] = NONE;
 	rms[CLASSROOM206].exits_to_room[SOUTH] = NONE;
-	rms[CLASSROOM206].exits_to_room[WEST] = HALLWAY3;
+	rms[CLASSROOM206].exits_to_room[WEST] = NONE;
 
-	rms[JANIATORSCLOSET].description.assign("Janitors Closet");
-	rms[JANIATORSCLOSET].exits_to_room[NORTH] = NONE;
-	rms[JANIATORSCLOSET].exits_to_room[EAST] = NONE;
-	rms[JANIATORSCLOSET].exits_to_room[SOUTH] = NONE;
-	rms[JANIATORSCLOSET].exits_to_room[WEST] = NONE;
-
-	rms[HALLWAY4].description.assign("Hallway 4");
-	rms[HALLWAY4].exits_to_room[NORTH] = HALLWAY3;
-	rms[HALLWAY4].exits_to_room[EAST] = NONE;
-	rms[HALLWAY4].exits_to_room[SOUTH] = HALLWAY5;
-	rms[HALLWAY4].exits_to_room[WEST] = NONE;
-
-	rms[HALLWAY5].description.assign("Hallway 5");
-	rms[HALLWAY5].exits_to_room[NORTH] = HALLWAY4;
-	rms[HALLWAY5].exits_to_room[EAST] = HALLWAY6;
-	rms[HALLWAY5].exits_to_room[SOUTH] = CLASSROOM307;
-	rms[HALLWAY5].exits_to_room[WEST] = HALLWAY10;
-
-	rms[HALLWAY6].description.assign("Hallway 6");
-	rms[HALLWAY6].exits_to_room[NORTH] = NONE;
-	rms[HALLWAY6].exits_to_room[EAST] = HALLWAY7;
-	rms[HALLWAY6].exits_to_room[SOUTH] = CLASSROOM305;
-	rms[HALLWAY6].exits_to_room[WEST] = HALLWAY5;
-
-	rms[HALLWAY7].description.assign("Hallway 7");
-	rms[HALLWAY7].exits_to_room[NORTH] = CLASSROOM301;
-	rms[HALLWAY7].exits_to_room[EAST] = HALLWAY8;
-	rms[HALLWAY7].exits_to_room[SOUTH] = NONE;
-	rms[HALLWAY7].exits_to_room[WEST] = HALLWAY6;
-
-	rms[HALLWAY8].description.assign("Hallway 8");
-	rms[HALLWAY8].exits_to_room[NORTH] = NONE;
-	rms[HALLWAY8].exits_to_room[EAST] = CLASSROOM303;
-	rms[HALLWAY8].exits_to_room[SOUTH] = NONE;
-	rms[HALLWAY8].exits_to_room[WEST] = HALLWAY7;
-
-	rms[HALLWAY9].description.assign("Hallway 9");
-	rms[HALLWAY9].exits_to_room[NORTH] = NONE;
-	rms[HALLWAY9].exits_to_room[EAST] = CLASSROOM202;
-	rms[HALLWAY9].exits_to_room[SOUTH] = HALLWAY1;
-	rms[HALLWAY9].exits_to_room[WEST] = NONE;
-
-	rms[HALLWAY10].description.assign("Hallway 10");
-	rms[HALLWAY10].exits_to_room[NORTH] = NONE;
-	rms[HALLWAY10].exits_to_room[EAST] = HALLWAY5;
-	rms[HALLWAY10].exits_to_room[SOUTH] = KITCHEN;
-	rms[HALLWAY10].exits_to_room[WEST] = NONE;
-
-/*
-	rms[HALLWAY11].description.assign("Hallway 11");
-	rms[HALLWAY11].exits_to_room[NORTH] = NONE;
-	rms[HALLWAY11].exits_to_room[EAST] = KITCHEN;
-	rms[HALLWAY11].exits_to_room[SOUTH] = NONE;
-	rms[HALLWAY11].exits_to_room[WEST] = HALLWAY10;
-*/
 	rms[CLASSROOM301].description.assign("Classroom 301");
-	rms[CLASSROOM301].exits_to_room[NORTH] = NONE;
+	rms[CLASSROOM301].exits_to_room[NORTH] = HALLWAY7;
 	rms[CLASSROOM301].exits_to_room[EAST] = NONE;
-	rms[CLASSROOM301].exits_to_room[SOUTH] = HALLWAY7;
+	rms[CLASSROOM301].exits_to_room[SOUTH] = NONE;
 	rms[CLASSROOM301].exits_to_room[WEST] = NONE;
 
 	rms[CLASSROOM303].description.assign("Classroom 303");
@@ -183,22 +102,112 @@ void set_rooms(room *rms)
 	rms[CLASSROOM303].exits_to_room[WEST] = HALLWAY8;
 
 	rms[CLASSROOM305].description.assign("Classroom 305");
-	rms[CLASSROOM305].exits_to_room[NORTH] = HALLWAY6;
+	rms[CLASSROOM305].exits_to_room[NORTH] = NONE;
 	rms[CLASSROOM305].exits_to_room[EAST] = NONE;
-	rms[CLASSROOM305].exits_to_room[SOUTH] = NONE;
+	rms[CLASSROOM305].exits_to_room[SOUTH] = HALLWAY9;
 	rms[CLASSROOM305].exits_to_room[WEST] = NONE;
 
 	rms[CLASSROOM307].description.assign("Classroom 307");
-	rms[CLASSROOM307].exits_to_room[NORTH] = HALLWAY5;
+	rms[CLASSROOM307].exits_to_room[NORTH] = NONE;
 	rms[CLASSROOM307].exits_to_room[EAST] = NONE;
 	rms[CLASSROOM307].exits_to_room[SOUTH] = NONE;
-	rms[CLASSROOM307].exits_to_room[WEST] = NONE;
+	rms[CLASSROOM307].exits_to_room[WEST] = HALLWAY10;
 
 	rms[KITCHEN].description.assign("Kitchen");
-	rms[KITCHEN].exits_to_room[NORTH] = HALLWAY10;
-	rms[KITCHEN].exits_to_room[EAST] = NONE;
+	rms[KITCHEN].exits_to_room[NORTH] = NONE;
+	rms[KITCHEN].exits_to_room[EAST] = HALLWAY6;
 	rms[KITCHEN].exits_to_room[SOUTH] = NONE;
 	rms[KITCHEN].exits_to_room[WEST] = NONE;
+
+	rms[CAFETERIA].description.assign("Cafateria");
+	rms[CAFETERIA].exits_to_room[NORTH] = NONE;
+	rms[CAFETERIA].exits_to_room[EAST] = NONE;
+	rms[CAFETERIA].exits_to_room[SOUTH] = HALLWAY3;
+	rms[CAFETERIA].exits_to_room[WEST] = HALLWAY4;
+
+	rms[STOREROOM].description.assign("School Store Room");
+	rms[STOREROOM].exits_to_room[NORTH] = NONE;
+	rms[STOREROOM].exits_to_room[EAST] = NONE;
+	rms[STOREROOM].exits_to_room[SOUTH] = HALLWAY5;
+	rms[STOREROOM].exits_to_room[WEST] = NONE;
+
+	rms[GYM].description.assign("Gym");
+	rms[GYM].exits_to_room[NORTH] = HALLWAY11;
+	rms[GYM].exits_to_room[EAST] = NONE;
+	rms[GYM].exits_to_room[SOUTH] = NONE;
+	rms[GYM].exits_to_room[WEST] = NONE;
+
+	rms[JANIATORSCLOSET].description.assign("Janitors Closet");
+	rms[JANIATORSCLOSET].exits_to_room[NORTH] = NONE;
+	rms[JANIATORSCLOSET].exits_to_room[EAST] = NONE;
+	rms[JANIATORSCLOSET].exits_to_room[SOUTH] = NONE;
+	rms[JANIATORSCLOSET].exits_to_room[WEST] = NONE;
+
+	rms[HALLWAY1].description.assign("Hallway 1");
+	rms[HALLWAY1].exits_to_room[NORTH] = SCIENCELAB;
+	rms[HALLWAY1].exits_to_room[EAST] = NONE;
+	rms[HALLWAY1].exits_to_room[SOUTH] = NONE;
+	rms[HALLWAY1].exits_to_room[WEST] = NONE;
+
+	rms[HALLWAY2].description.assign("Hallway 2");
+	rms[HALLWAY2].exits_to_room[NORTH] = NONE;
+	rms[HALLWAY2].exits_to_room[EAST] = NONE;
+	rms[HALLWAY2].exits_to_room[SOUTH] = NONE;
+	rms[HALLWAY2].exits_to_room[WEST] = CLASSROOM202;
+
+	rms[HALLWAY3].description.assign("Hallway 3");
+	rms[HALLWAY3].exits_to_room[NORTH] = NONE;
+	rms[HALLWAY3].exits_to_room[EAST] = NONE;
+	rms[HALLWAY3].exits_to_room[SOUTH] = CLASSROOM206;
+	rms[HALLWAY3].exits_to_room[WEST] = NONE;
+
+	rms[HALLWAY4].description.assign("Hallway 4");
+	rms[HALLWAY4].exits_to_room[NORTH] = NONE;
+	rms[HALLWAY4].exits_to_room[EAST] = NONE;
+	rms[HALLWAY4].exits_to_room[SOUTH] = NONE;
+	rms[HALLWAY4].exits_to_room[WEST] = CAFETERIA;
+
+	rms[HALLWAY5].description.assign("Hallway 5");
+	rms[HALLWAY5].exits_to_room[NORTH] = STOREROOM;
+	rms[HALLWAY5].exits_to_room[EAST] = NONE;
+	rms[HALLWAY5].exits_to_room[SOUTH] = NONE;
+	rms[HALLWAY5].exits_to_room[WEST] = NONE;
+
+	rms[HALLWAY6].description.assign("Hallway 6");
+	rms[HALLWAY6].exits_to_room[NORTH] = NONE;
+	rms[HALLWAY6].exits_to_room[EAST] = NONE;
+	rms[HALLWAY6].exits_to_room[SOUTH] = NONE;
+	rms[HALLWAY6].exits_to_room[WEST] = KITCHEN;
+
+	rms[HALLWAY7].description.assign("Hallway 7");
+	rms[HALLWAY7].exits_to_room[NORTH] = NONE;
+	rms[HALLWAY7].exits_to_room[EAST] = NONE;
+	rms[HALLWAY7].exits_to_room[SOUTH] = CLASSROOM301;
+	rms[HALLWAY7].exits_to_room[WEST] = NONE;
+
+	rms[HALLWAY8].description.assign("Hallway 8");
+	rms[HALLWAY8].exits_to_room[NORTH] = NONE;
+	rms[HALLWAY8].exits_to_room[EAST] = NONE;
+	rms[HALLWAY8].exits_to_room[SOUTH] = NONE;
+	rms[HALLWAY8].exits_to_room[WEST] = CLASSROOM303;
+
+	rms[HALLWAY9].description.assign("Hallway 9");
+	rms[HALLWAY9].exits_to_room[NORTH] = CLASSROOM305;
+	rms[HALLWAY9].exits_to_room[EAST] = NONE;
+	rms[HALLWAY9].exits_to_room[SOUTH] = NONE;
+	rms[HALLWAY9].exits_to_room[WEST] = NONE;
+
+	rms[HALLWAY10].description.assign("Hallway 10");
+	rms[HALLWAY10].exits_to_room[NORTH] = NONE;
+	rms[HALLWAY10].exits_to_room[EAST] = NONE;
+	rms[HALLWAY10].exits_to_room[SOUTH] = NONE;
+	rms[HALLWAY10].exits_to_room[WEST] = CLASSROOM307;
+
+	rms[HALLWAY11].description.assign("Hallway 11");
+	rms[HALLWAY11].exits_to_room[NORTH] = NONE;
+	rms[HALLWAY11].exits_to_room[EAST] = NONE;
+	rms[HALLWAY11].exits_to_room[SOUTH] = GYM;
+	rms[HALLWAY11].exits_to_room[WEST] = NONE;
 
 
 }
@@ -252,9 +261,7 @@ void set_nouns(noun *nns)
 	//enum en_NOUNS {
 	//	JAN_CLOSET_DOOR, SCI_LAB_DOOR, CR202_DOOR, CAFETERIA_DOOR, KITCHEN_DOOR, SR_DOOR,
 	//	CR206_DOOR, CR307_DOOR, CR305_DOOR, CR301_DOOR, CR303_DOOR, MAGNET, METER, MONEY, TEXTBOOK};
-	//doors will be criticl, everything else meh
 
-	//will need to set up many more of these
 	nns[JAN_CLOSET_DOOR].word = "DOOR";
 	nns[JAN_CLOSET_DOOR].code = JAN_CLOSET_DOOR;
 	nns[JAN_CLOSET_DOOR].description = "a closed janiators closet door";
@@ -265,11 +272,11 @@ void set_nouns(noun *nns)
 	nns[SCI_LAB_DOOR].code = SCI_LAB_DOOR;
 	nns[SCI_LAB_DOOR].description = "a closed science lab door";
 	nns[SCI_LAB_DOOR].can_carry = false;
-	nns[SCI_LAB_DOOR].location = SCIENCELAB;
+	nns[SCI_LAB_DOOR].location = PATHWAY;
 
 	nns[CR202_DOOR].word = "DOOR";
 	nns[CR202_DOOR].code = CR202_DOOR;
-	nns[CR202_DOOR].description = "classroom 202's door";
+	nns[CR202_DOOR].description = "classroxom 202's door";
 	nns[CR202_DOOR].can_carry = false;
 	nns[CR202_DOOR].location = CLASSROOM202;
 
@@ -315,36 +322,49 @@ void set_nouns(noun *nns)
 	nns[KITCHEN_DOOR].can_carry = false;
 	nns[KITCHEN_DOOR].location = KITCHEN;
 
+	nns[GYM_DOOR].word = "DOOR";
+	nns[GYM_DOOR].code = GYM_DOOR;
+	nns[GYM_DOOR].description = "a closed GYM door";
+	nns[GYM_DOOR].can_carry = false;
+	nns[GYM_DOOR].location = GYM;
+
 	nns[CAFETERIA_DOOR].word = "DOOR";
 	nns[CAFETERIA_DOOR].code = CAFETERIA_DOOR;
 	nns[CAFETERIA_DOOR].description = "a closed cafeteria door";
 	nns[CAFETERIA_DOOR].can_carry = false;
 	nns[CAFETERIA_DOOR].location = CAFETERIA;
 
-	//test items? use or not use can add as needed prob for story line and such
+	//Using for story line
 	nns[MAGNET].word = "MAGNET";
 	nns[MAGNET].code = MAGNET;
-	nns[MAGNET].description = "a magnet";
-	nns[MAGNET].can_carry = true;
+	nns[MAGNET].description = "A large magnet sits in the center of the room magnet.\nA hum is emanating from the magnet and all the metal objects in the room to be shifted twords the large magnet.\nThe purpose of such a large magnet is puzzling to you and why its running with no one watching it.";
+	nns[MAGNET].can_carry = false;
 	nns[MAGNET].location = SCIENCELAB;
 
 	nns[METER].word = "METER";
 	nns[METER].code = METER;
-	nns[METER].description = "a parking meter";
+	nns[METER].description = "A large quanity of parking meters sit in a row in the parking lot. /nWhat kind of school has parking meters?";
 	nns[METER].can_carry = false;
 	nns[METER].location = START;
 
 	nns[MONEY].word = "MONEY";
 	nns[MONEY].code = MONEY;
-	nns[MONEY].description = "some money";
+	nns[MONEY].description = "A huge amount of money in various denominations lie in a pile in the corner. /nNever seen that before in a Janiators Closet.";
 	nns[MONEY].can_carry = true;
 	nns[MONEY].location = JANIATORSCLOSET;
 
 	nns[TEXTBOOK].word = "textbook";
 	nns[TEXTBOOK].code = TEXTBOOK;
-	nns[TEXTBOOK].description = "a textbook";
+	nns[TEXTBOOK].description = "A weird looking textbook lies on a desk in the back of the room. /nThe language is not one you've ever seen before. /nWhere am I?";
 	nns[TEXTBOOK].can_carry = false;
 	nns[TEXTBOOK].location = CLASSROOM202;
+
+	nns[DESK].word = "desk";
+	nns[DESK].code = DESK;
+	nns[DESK].description = "The room is nearly full with desks in perfect rows and stacked one on top of the other all the way to the ceiling. /nThe desks are so close together that it's nearly impossible to navigate anywhere of meaning in the class room.";
+	nns[DESK].can_carry = false;
+	nns[DESK].location = CLASSROOM206;
+
 }
 
 // -------------------------------------------------------------------------------------------------
@@ -419,14 +439,14 @@ void section_command(string Cmd, string &wd1, string &wd2)
 void look_around(int loc, room *rms, terms *dir, noun *nns)
 {
 	int i;
-	cout << "I am in a " << rms[loc].description << "." << endl;
+	cout << "I am in " << rms[loc].description << "." << endl;
 
 	//Look command shows exits and reports them to the player
 	for (i = 0; i < DIRS; i++)
 	{
 		if (rms[loc].exits_to_room[i] != NONE)
 		{
-			cout << "There is an exit " << dir[i].word << " to a " << rms[rms[loc].exits_to_room[i]].description << "." << endl;
+			cout << "There is an exit " << dir[i].word << " to " << rms[rms[loc].exits_to_room[i]].description << "." << endl;
 		}
 	}
 
@@ -444,7 +464,7 @@ void examine_objects(int loc,  noun *nns)
 	{
 		if (nns[i].location == loc)
 		{
-			cout << "I see " << nns[i].description << "." << endl;
+			cout << "" << nns[i].description << "." << endl;
 		}
 	}
 }
@@ -465,7 +485,7 @@ bool parser(int &loc, string wd1, string wd2, terms *dir, terms *vbs, room *rms,
 			if (rms[loc].exits_to_room[dir[i].code] != NONE)
 			{
 				loc = rms[loc].exits_to_room[dir[i].code];
-				cout << "I am now in a " << rms[loc].description << "." << endl;
+				cout << "I am now in " << rms[loc].description << "." << endl;
 				//case for the gym to janiators closet door. will need to added for most of the other rooms
 				if (loc == JANIATORSCLOSET || loc == GYM)
 				{
@@ -532,15 +552,54 @@ bool parser(int &loc, string wd1, string wd2, terms *dir, terms *vbs, room *rms,
 	//questions would need to be prompted in here I believe
 	if (VERB_ACTION == OPEN)
 	{
-		if (NOUN_MATCH == JAN_CLOSET_DOOR)
+
+
+
+
+
+		//SCI LAB
+		if (NOUN_MATCH == SCIENCELAB)
 		{
-			if (loc == GYM || loc == JANIATORSCLOSET)
+			if (loc == PATHWAY || loc == SCIENCELAB)
 			{
 				if (door_state == false)
 				{
 					door_state = true;
-					rms[GYM].exits_to_room[SOUTH] = JANIATORSCLOSET;
-					rms[JANIATORSCLOSET].exits_to_room[NORTH] = GYM;
+					rms[PATHWAY].exits_to_room[SOUTH] = SCIENCELAB;
+					rms[SCIENCELAB].exits_to_room[NORTH] = PATHWAY;
+					nns[SCI_LAB_DOOR].description.clear();
+					nns[SCI_LAB_DOOR].description.assign("an open science lab door");
+					cout << "I have opened the door." << endl;
+					return true;
+				}
+				else if (door_state == true)
+				{
+					cout << "The door is already open." << endl;
+					return true;
+				}
+			}
+			else
+			{
+				cout << "There is no door to open here." << endl;
+				return true;
+			}
+		}
+		else
+		{
+			cout << "Opening that is not possible." << endl;
+			return true;
+		}
+
+		//JANIATORS CLOSET
+		if (NOUN_MATCH == JANIATORSCLOSET)
+		{
+			if (loc == HALLWAY11 || loc == JANIATORSCLOSET)
+			{
+				if (door_state == false)
+				{
+					door_state = true;
+					rms[HALLWAY11].exits_to_room[NORTH] = JANIATORSCLOSET;
+					rms[JANIATORSCLOSET].exits_to_room[SOUTH] = HALLWAY11;
 					nns[JAN_CLOSET_DOOR].description.clear();
 					nns[JAN_CLOSET_DOOR].description.assign("an open janiators closet door");
 					cout << "I have opened the door." << endl;
@@ -563,16 +622,17 @@ bool parser(int &loc, string wd1, string wd2, terms *dir, terms *vbs, room *rms,
 			cout << "Opening that is not possible." << endl;
 			return true;
 		}
+
 		//classroom 202
-		if(NOUN_MATCH == CR202_DOOR)
+		if(NOUN_MATCH == CLASSROOM202)
 		{
-			if (loc == HALLWAY9 || loc == CLASSROOM202)
+			if (loc == HALLWAY1 || loc == CLASSROOM202)
 			{
 				if (door_state == false)
 				{
 					door_state = true;
-					rms[HALLWAY9].exits_to_room[EAST] = CLASSROOM202;
-					rms[CLASSROOM202].exits_to_room[WEST] = HALLWAY9;
+					rms[HALLWAY1].exits_to_room[SOUTH] = CLASSROOM202;
+					rms[CLASSROOM202].exits_to_room[NORTH] = HALLWAY1;
 					nns[CR202_DOOR].description.clear();
 					nns[CR202_DOOR].description.assign("an open class room door");
 					cout << "I have opened the door." << endl;
@@ -597,15 +657,15 @@ bool parser(int &loc, string wd1, string wd2, terms *dir, terms *vbs, room *rms,
 		}
 
 		//classroom 206
-		if (NOUN_MATCH == CR206_DOOR)
+		if (NOUN_MATCH == CLASSROOM206)
 		{
-			if (loc == HALLWAY9 || loc == CLASSROOM202)
+			if (loc == HALLWAY2 || loc == CLASSROOM202)
 			{
 				if (door_state == false)
 				{
 					door_state = true;
-					rms[HALLWAY3].exits_to_room[EAST] = CLASSROOM206;
-					rms[CLASSROOM202].exits_to_room[WEST] = HALLWAY3;
+					rms[HALLWAY2].exits_to_room[NORTH] = CLASSROOM206;
+					rms[CLASSROOM202].exits_to_room[SOUTH] = HALLWAY2;
 					nns[CR206_DOOR].description.clear();
 					nns[CR206_DOOR].description.assign("an open class room door");
 					cout << "I have opened the door." << endl;
@@ -631,15 +691,15 @@ bool parser(int &loc, string wd1, string wd2, terms *dir, terms *vbs, room *rms,
 	}
 
 	//classroom 301
-	if (NOUN_MATCH == CR301_DOOR)
+	if (NOUN_MATCH == CLASSROOM301)
 	{
-		if (loc == HALLWAY7 || loc == CLASSROOM301)
+		if (loc == HALLWAY6 || loc == CLASSROOM301)
 		{
 			if (door_state == false)
 			{
 				door_state = true;
-				rms[HALLWAY7].exits_to_room[NORTH] = CLASSROOM301;
-				rms[CLASSROOM301].exits_to_room[SOUTH] = HALLWAY7;
+				rms[HALLWAY6].exits_to_room[NORTH] = CLASSROOM301;
+				rms[CLASSROOM301].exits_to_room[SOUTH] = HALLWAY6;
 				nns[CR301_DOOR].description.clear();
 				nns[CR301_DOOR].description.assign("an open class room door");
 				cout << "I have opened the door." << endl;
@@ -664,15 +724,15 @@ bool parser(int &loc, string wd1, string wd2, terms *dir, terms *vbs, room *rms,
 	}
 	
 	//classroom 303
-	if (NOUN_MATCH == CR303_DOOR)
+	if (NOUN_MATCH == CLASSROOM303)
 	{
-		if (loc == HALLWAY8 || loc == CLASSROOM303)
+		if (loc == HALLWAY7 || loc == CLASSROOM303)
 		{
 			if (door_state == false)
 			{
 				door_state = true;
-				rms[HALLWAY8].exits_to_room[EAST] = CLASSROOM303;
-				rms[CLASSROOM303].exits_to_room[WEST] = HALLWAY8;
+				rms[HALLWAY7].exits_to_room[NORTH] = CLASSROOM303;
+				rms[CLASSROOM303].exits_to_room[SOUTH] = HALLWAY7;
 				nns[CR303_DOOR].description.clear();
 				nns[CR303_DOOR].description.assign("an open class room door");
 				cout << "I have opened the door." << endl;
@@ -698,15 +758,15 @@ bool parser(int &loc, string wd1, string wd2, terms *dir, terms *vbs, room *rms,
 
 
 	//classroom 305
-	if (NOUN_MATCH == CR305_DOOR)
+	if (NOUN_MATCH == CLASSROOM305)
 	{
-		if (loc == HALLWAY6 || loc == CLASSROOM305)
+		if (loc == HALLWAY8 || loc == CLASSROOM305)
 		{
 			if (door_state == false)
 			{
 				door_state = true;
-				rms[HALLWAY6].exits_to_room[SOUTH] = CLASSROOM305;
-				rms[CLASSROOM305].exits_to_room[NORTH] = HALLWAY6;
+				rms[HALLWAY8].exits_to_room[SOUTH] = CLASSROOM305;
+				rms[CLASSROOM305].exits_to_room[NORTH] = HALLWAY8;
 				nns[CR305_DOOR].description.clear();
 				nns[CR305_DOOR].description.assign("an open class room door");
 				cout << "I have opened the door." << endl;
@@ -731,15 +791,15 @@ bool parser(int &loc, string wd1, string wd2, terms *dir, terms *vbs, room *rms,
 	}
 
 	//classroom 307
-	if (NOUN_MATCH == CR307_DOOR)
+	if (NOUN_MATCH == CLASSROOM307)
 	{
-		if (loc == HALLWAY5 || loc == CLASSROOM307)
+		if (loc == HALLWAY9 || loc == CLASSROOM307)
 		{
 			if (door_state == false)
 			{
 				door_state = true;
-				rms[HALLWAY5].exits_to_room[SOUTH] = CLASSROOM307;
-				rms[CLASSROOM307].exits_to_room[NORTH] = HALLWAY5;
+				rms[HALLWAY9].exits_to_room[SOUTH] = CLASSROOM307;
+				rms[CLASSROOM307].exits_to_room[NORTH] = HALLWAY9;
 				nns[CR307_DOOR].description.clear();
 				nns[CR307_DOOR].description.assign("an open class room door");
 				cout << "I have opened the door." << endl;
@@ -764,15 +824,15 @@ bool parser(int &loc, string wd1, string wd2, terms *dir, terms *vbs, room *rms,
 	}
 
 	//STORE ROOM
-	if (NOUN_MATCH == SR_DOOR)
+	if (NOUN_MATCH == STOREROOM)
 	{
-		if (loc == HALLWAY2 || loc == STOREROOM)
+		if (loc == HALLWAY4 || loc == STOREROOM)
 		{
 			if (door_state == false)
 			{
 				door_state = true;
-				rms[HALLWAY2].exits_to_room[EAST] = STOREROOM;
-				rms[STOREROOM].exits_to_room[WEST] = HALLWAY2;
+				rms[HALLWAY4].exits_to_room[SOUTH] = STOREROOM;
+				rms[STOREROOM].exits_to_room[NORTH] = HALLWAY4;
 				nns[SR_DOOR].description.clear();
 				nns[SR_DOOR].description.assign("an open store room door");
 				cout << "I have opened the door." << endl;
@@ -797,15 +857,15 @@ bool parser(int &loc, string wd1, string wd2, terms *dir, terms *vbs, room *rms,
 	}
 
 	//CAFETERIA
-	if (NOUN_MATCH == CAFETERIA_DOOR)
+	if (NOUN_MATCH == CAFETERIA)
 	{
-		if (loc == HALLWAY1 || loc == CAFETERIA)
+		if (loc == HALLWAY3 || loc == CAFETERIA)
 		{
 			if (door_state == false)
 			{
 				door_state = true;
-				rms[HALLWAY1].exits_to_room[EAST] = CAFETERIA;
-				rms[CAFETERIA].exits_to_room[WEST] = HALLWAY1;
+				rms[HALLWAY3].exits_to_room[NORTH] = CAFETERIA;
+				rms[CAFETERIA].exits_to_room[SOUTH] = HALLWAY3;
 				nns[CAFETERIA_DOOR].description.clear();
 				nns[CAFETERIA_DOOR].description.assign("an open store room door");
 				cout << "I have opened the door." << endl;
@@ -829,18 +889,18 @@ bool parser(int &loc, string wd1, string wd2, terms *dir, terms *vbs, room *rms,
 		return true;
 	}
 
-	//SCI LAB
-	if (NOUN_MATCH == SCI_LAB_DOOR)
+	//GYM
+	if (NOUN_MATCH == GYM)
 	{
-		if (loc == START || loc == SCIENCELAB)
+		if (loc == HALLWAY10 || loc == GYM)
 		{
 			if (door_state == false)
 			{
 				door_state = true;
-				rms[START].exits_to_room[NORTH] = SCIENCELAB;
-				rms[SCIENCELAB].exits_to_room[SOUTH] = START;
-				nns[SCI_LAB_DOOR].description.clear();
-				nns[SCI_LAB_DOOR].description.assign("an open science lab door");
+				rms[HALLWAY10].exits_to_room[NORTH] = GYM;
+				rms[GYM].exits_to_room[SOUTH] = HALLWAY10;
+				nns[GYM_DOOR].description.clear();
+				nns[GYM_DOOR].description.assign("an open GYM door");
 				cout << "I have opened the door." << endl;
 				return true;
 			}
@@ -862,20 +922,22 @@ bool parser(int &loc, string wd1, string wd2, terms *dir, terms *vbs, room *rms,
 		return true;
 	}
 
-	//close Do we need this? prob not but hey its here
+
+	//close Do we need this? prob not but hey its here for one door
+	/*
 	if (VERB_ACTION == CLOSE)
 	{
-		if (NOUN_MATCH == JAN_CLOSET_DOOR)
+		if (NOUN_MATCH == HALLWAY11)
 		{
-			if (loc == GYM || loc == JANIATORSCLOSET)
+			if (loc == HALLWAY11 || loc == JANIATORSCLOSET)
 			{
 				if (door_state == true)
 				{
 					door_state = true;
-					rms[GYM].exits_to_room[SOUTH] = JANIATORSCLOSET;
-					rms[JANIATORSCLOSET].exits_to_room[NORTH] = GYM;
+					rms[HALLWAY11].exits_to_room[NORTH] = JANIATORSCLOSET;
+					rms[JANIATORSCLOSET].exits_to_room[SOUTH] = HALLWAY11;
 					nns[JAN_CLOSET_DOOR].description.clear();
-					nns[JAN_CLOSET_DOOR].description.assign("an open store room door");
+					nns[JAN_CLOSET_DOOR].description.assign("an open janiator's closet door");
 					cout << "I have opened the door." << endl;
 					return true;
 				}
@@ -897,7 +959,7 @@ bool parser(int &loc, string wd1, string wd2, terms *dir, terms *vbs, room *rms,
 			return true;
 		}
 	}
-	
+	*/
 
 	return false;
 }
@@ -927,10 +989,10 @@ int main()
 
 	while (word_1 != "QUIT")
 	{
-		//this needs some work
+		//this needs some work for a menu, And I keep putting it off
 		command.clear();
 		cout << "What shall I do? ";
-		cout << "\nNorth \nSouth \nWest \nEast \nGET, DROP, USE, OPEN DOOR, CLOSE, EXAMINE, INVENTORY, LOOK\n";
+		cout << "\nNorth \nSouth \nWest \nEast \nOPEN DOOR, EXAMINE, LOOK\n";
 		getline(cin, command);
 
 		word_1.clear();
