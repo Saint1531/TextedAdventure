@@ -133,7 +133,7 @@ void set_rooms(room *rms)
 	rms[CLASSROOM206].description.assign("Classroom 206");
 	rms[CLASSROOM206].exits_to_room[NORTH] = HALLWAY3;
 	rms[CLASSROOM206].exits_to_room[EAST] = NONE;
-	rms[CLASSROOM206].exits_to_room[SOUTH] = HALLWAY2;
+	rms[CLASSROOM206].exits_to_room[SOUTH] = NONE;
 	rms[CLASSROOM206].exits_to_room[WEST] = NONE;
 
 	rms[CLASSROOM301].description.assign("Classroom 301");
@@ -193,17 +193,17 @@ void set_rooms(room *rms)
 	rms[HALLWAY1].description.assign("Hallway 1");
 	rms[HALLWAY1].exits_to_room[NORTH] = SCIENCELAB;
 	rms[HALLWAY1].exits_to_room[EAST] = NONE;
-	rms[HALLWAY1].exits_to_room[SOUTH] = CLASSROOM202;
+	rms[HALLWAY1].exits_to_room[SOUTH] = NONE;
 	rms[HALLWAY1].exits_to_room[WEST] = NONE;
 
 	rms[HALLWAY2].description.assign("Hallway 2");
-	rms[HALLWAY2].exits_to_room[NORTH] = CLASSROOM206;
+	rms[HALLWAY2].exits_to_room[NORTH] = NONE;
 	rms[HALLWAY2].exits_to_room[EAST] = NONE;
 	rms[HALLWAY2].exits_to_room[SOUTH] = NONE;
 	rms[HALLWAY2].exits_to_room[WEST] = CLASSROOM202;
 
 	rms[HALLWAY3].description.assign("Hallway 3");
-	rms[HALLWAY3].exits_to_room[NORTH] = CAFETERIA;
+	rms[HALLWAY3].exits_to_room[NORTH] = NONE;
 	rms[HALLWAY3].exits_to_room[EAST] = NONE;
 	rms[HALLWAY3].exits_to_room[SOUTH] = CLASSROOM206;
 	rms[HALLWAY3].exits_to_room[WEST] = NONE;
@@ -211,23 +211,23 @@ void set_rooms(room *rms)
 	rms[HALLWAY4].description.assign("Hallway 4");
 	rms[HALLWAY4].exits_to_room[NORTH] = NONE;
 	rms[HALLWAY4].exits_to_room[EAST] = NONE;
-	rms[HALLWAY4].exits_to_room[SOUTH] = STOREROOM;
+	rms[HALLWAY4].exits_to_room[SOUTH] = NONE;
 	rms[HALLWAY4].exits_to_room[WEST] = CAFETERIA;
 
 	rms[HALLWAY5].description.assign("Hallway 5");
 	rms[HALLWAY5].exits_to_room[NORTH] = STOREROOM;
 	rms[HALLWAY5].exits_to_room[EAST] = NONE;
-	rms[HALLWAY5].exits_to_room[SOUTH] = KITCHEN;
+	rms[HALLWAY5].exits_to_room[SOUTH] = NONE;
 	rms[HALLWAY5].exits_to_room[WEST] = NONE;
 
 	rms[HALLWAY6].description.assign("Hallway 6");
-	rms[HALLWAY6].exits_to_room[NORTH] = CLASSROOM301;
+	rms[HALLWAY6].exits_to_room[NORTH] = NONE;
 	rms[HALLWAY6].exits_to_room[EAST] = NONE;
 	rms[HALLWAY6].exits_to_room[SOUTH] = NONE;
 	rms[HALLWAY6].exits_to_room[WEST] = KITCHEN;
 
 	rms[HALLWAY7].description.assign("Hallway 7");
-	rms[HALLWAY7].exits_to_room[NORTH] = CLASSROOM303;
+	rms[HALLWAY7].exits_to_room[NORTH] = NONE;
 	rms[HALLWAY7].exits_to_room[EAST] = NONE;
 	rms[HALLWAY7].exits_to_room[SOUTH] = CLASSROOM301;
 	rms[HALLWAY7].exits_to_room[WEST] = NONE;
@@ -235,7 +235,7 @@ void set_rooms(room *rms)
 	rms[HALLWAY8].description.assign("Hallway 8");
 	rms[HALLWAY8].exits_to_room[NORTH] = NONE;
 	rms[HALLWAY8].exits_to_room[EAST] = NONE;
-	rms[HALLWAY8].exits_to_room[SOUTH] = CLASSROOM305;
+	rms[HALLWAY8].exits_to_room[SOUTH] = NONE;
 	rms[HALLWAY8].exits_to_room[WEST] = CLASSROOM303;
 
 	rms[HALLWAY9].description.assign("Hallway 9");
@@ -245,13 +245,13 @@ void set_rooms(room *rms)
 	rms[HALLWAY9].exits_to_room[WEST] = NONE;
 
 	rms[HALLWAY10].description.assign("Hallway 10");
-	rms[HALLWAY10].exits_to_room[NORTH] = GYM;
+	rms[HALLWAY10].exits_to_room[NORTH] = NONE;
 	rms[HALLWAY10].exits_to_room[EAST] = NONE;
 	rms[HALLWAY10].exits_to_room[SOUTH] = NONE;
 	rms[HALLWAY10].exits_to_room[WEST] = CLASSROOM307;
 
 	rms[HALLWAY11].description.assign("Hallway 11");
-	rms[HALLWAY11].exits_to_room[NORTH] = JANIATORSCLOSET;
+	rms[HALLWAY11].exits_to_room[NORTH] = NONE;
 	rms[HALLWAY11].exits_to_room[EAST] = NONE;
 	rms[HALLWAY11].exits_to_room[SOUTH] = GYM;
 	rms[HALLWAY11].exits_to_room[WEST] = NONE;
@@ -301,73 +301,73 @@ void set_nouns(noun *nns)
 	//	TEXTBOOK, DESK, GYM_DOOR, IND_GRILL, LOCKER, TRAY, SIGN, COMPUTER, CHALKBOARD,
 	//	GLOBE, MERRYGOROUND, PROJECTOR};
 
-	nns[JAN_CLOSET_DOOR].word = "DOOR";
+	nns[JAN_CLOSET_DOOR].word = "JANDOOR";
 	nns[JAN_CLOSET_DOOR].code = JAN_CLOSET_DOOR;
 	nns[JAN_CLOSET_DOOR].description = "a closed janiators closet door";
 	nns[JAN_CLOSET_DOOR].can_carry = false;
 	nns[JAN_CLOSET_DOOR].location = JANIATORSCLOSET;
 
-	nns[SCI_LAB_DOOR].word = "lab";
+	nns[SCI_LAB_DOOR].word = "LAB";
 	nns[SCI_LAB_DOOR].code = SCI_LAB_DOOR;
 	nns[SCI_LAB_DOOR].description = "a closed science lab door";
 	nns[SCI_LAB_DOOR].can_carry = false;
 	nns[SCI_LAB_DOOR].location = PATHWAY;
 
-	nns[CR202_DOOR].word = "DOOR";
+	nns[CR202_DOOR].word = "CR202";
 	nns[CR202_DOOR].code = CR202_DOOR;
 	nns[CR202_DOOR].description = "classroom 202's door";
 	nns[CR202_DOOR].can_carry = false;
 	nns[CR202_DOOR].location = HALLWAY1;
 
-	nns[CR206_DOOR].word = "DOOR";
+	nns[CR206_DOOR].word = "CR206";
 	nns[CR206_DOOR].code = CR206_DOOR;
 	nns[CR206_DOOR].description = "classroom 206's door";
 	nns[CR206_DOOR].can_carry = false;
-	nns[CR206_DOOR].location = CLASSROOM206;
+	nns[CR206_DOOR].location = HALLWAY2;
 
-	nns[CR301_DOOR].word = "DOOR";
+	nns[CR301_DOOR].word = "CR301";
 	nns[CR301_DOOR].code = CR301_DOOR;
 	nns[CR301_DOOR].description = "classroom 301's door";
 	nns[CR301_DOOR].can_carry = false;
 	nns[CR301_DOOR].location = CLASSROOM301;
 
-	nns[CR303_DOOR].word = "DOOR";
+	nns[CR303_DOOR].word = "CR303";
 	nns[CR303_DOOR].code = CR303_DOOR;
 	nns[CR303_DOOR].description = "classroom 303's door";
 	nns[CR303_DOOR].can_carry = false;
 	nns[CR303_DOOR].location = CLASSROOM303;
 
-	nns[CR305_DOOR].word = "DOOR";
+	nns[CR305_DOOR].word = "CR305";
 	nns[CR305_DOOR].code = CR305_DOOR;
 	nns[CR305_DOOR].description = "classroom 305's door";
 	nns[CR305_DOOR].can_carry = false;
 	nns[CR305_DOOR].location = CLASSROOM305;
 
-	nns[CR307_DOOR].word = "DOOR";
+	nns[CR307_DOOR].word = "CR307";
 	nns[CR307_DOOR].code = CR307_DOOR;
 	nns[CR307_DOOR].description = "classroom 307's door";
 	nns[CR307_DOOR].can_carry = false;
 	nns[CR307_DOOR].location = CLASSROOM307;
 
-	nns[SR_DOOR].word = "DOOR";
+	nns[SR_DOOR].word = "SRDOOR";
 	nns[SR_DOOR].code = SR_DOOR;
 	nns[SR_DOOR].description = "a closed store room door";
 	nns[SR_DOOR].can_carry = false;
 	nns[SR_DOOR].location = STOREROOM;
 
-	nns[KITCHEN_DOOR].word = "DOOR";
+	nns[KITCHEN_DOOR].word = "KITCHEN";
 	nns[KITCHEN_DOOR].code = KITCHEN_DOOR;
 	nns[KITCHEN_DOOR].description = "a closed kitchen door";
 	nns[KITCHEN_DOOR].can_carry = false;
 	nns[KITCHEN_DOOR].location = KITCHEN;
 
-	nns[GYM_DOOR].word = "DOOR";
+	nns[GYM_DOOR].word = "GYM";
 	nns[GYM_DOOR].code = GYM_DOOR;
 	nns[GYM_DOOR].description = "a closed GYM door";
 	nns[GYM_DOOR].can_carry = false;
 	nns[GYM_DOOR].location = GYM;
 
-	nns[CAFETERIA_DOOR].word = "DOOR";
+	nns[CAFETERIA_DOOR].word = "CAFETERIA";
 	nns[CAFETERIA_DOOR].code = CAFETERIA_DOOR;
 	nns[CAFETERIA_DOOR].description = "a closed cafeteria door";
 	nns[CAFETERIA_DOOR].can_carry = false;
@@ -563,8 +563,8 @@ void examine_objects(int loc,  noun *nns)
 //back bone of the program
 bool parser(int &loc, string wd1, string wd2, terms *dir, terms *vbs, room *rms, noun *nns)
 {
+
 	
-	static bool door_state = false; //false is a closed door.
 
 	int i;
 
@@ -588,7 +588,7 @@ bool parser(int &loc, string wd1, string wd2, terms *dir, terms *vbs, room *rms,
 	}
 
 
-	
+
 
 	//verbs and stuff
 	int NOUN_MATCH = NONE;
@@ -603,7 +603,7 @@ bool parser(int &loc, string wd1, string wd2, terms *dir, terms *vbs, room *rms,
 		}
 	}
 
-	
+
 	if (wd2 != "")
 	{
 		for (i = 0; i < NOUNS; i++)
@@ -632,7 +632,7 @@ bool parser(int &loc, string wd1, string wd2, terms *dir, terms *vbs, room *rms,
 	//examine verb
 	if (VERB_ACTION == EXAMINE)
 	{
-		
+
 		int input;
 
 		while (true)
@@ -685,163 +685,84 @@ bool parser(int &loc, string wd1, string wd2, terms *dir, terms *vbs, room *rms,
 					break;
 				}
 			}
-			
+
 		}
 		examine_objects(loc, nns);
 		return true;
 	}
 
-	
+
 	//actions for usage of VERB OPEN
 	if (VERB_ACTION == OPEN)
 	{
+		int input;
 
-			//SCI LAB
-			if (NOUN_MATCH == SCIENCELAB)
-			{
-				if (loc == PATHWAY || loc == SCIENCELAB)
-				{
-					if (door_state == false)
-					{
-						door_state = true;
-						rms[PATHWAY].exits_to_room[SOUTH] = SCIENCELAB;
-						rms[SCIENCELAB].exits_to_room[NORTH] = PATHWAY;
-						nns[SCI_LAB_DOOR].description.clear();
-						nns[SCI_LAB_DOOR].description.assign("an open science lab door");
-						cout << "I have opened the door." << endl;
-						return true;
-					}
-					else if (door_state == true)
-					{
-						cout << "The door is already open." << endl;
-						return true;
-					}
-				}
-				else
-				{
-					cout << "There is no door to open here." << endl;
-					return true;
-				}
+		while (true)
+		{
+			//call the question
+			if (currentLevel == 1) {
+				question = bank.getLevel1Question();
 			}
-			else
-			{
-				cout << "Opening that is not possible." << endl;
-				return true;
+			else if (currentLevel == 2) {
+				question = bank.getLevel2Question();
+			}
+			else if (currentLevel == 3) {
+				question = bank.getLevel3Question();
+			}
+			else{
+				question = bank.getLevel4Question();
 			}
 
-			//classroom 202
-			if (NOUN_MATCH == CLASSROOM202)
-			{
-				if (loc == CLASSROOM202 || loc == HALLWAY1)
-				{
-					if (door_state == false)
-					{
-						door_state = true;
-						rms[HALLWAY1].exits_to_room[SOUTH] = CLASSROOM202;
-						rms[CLASSROOM202].exits_to_room[NORTH] = HALLWAY1;
-						nns[CR202_DOOR].description.clear();
-						nns[CR202_DOOR].description.assign("an open class room door");
-						cout << "I have opened the door." << endl;
-						return true;
-					}
-					else if (door_state == true)
-					{
-						cout << "The door is already open." << endl;
-						return true;
-					}
-				}
-				else
-				{
-					cout << "There is no door to open here." << endl;
-					return true;
-				}
-			}
-			else
-			{
-				cout << "Opening that is not possible." << endl;
-				return true;
+			answerChoices = question.getAnswers();
+			cout << question.getQuestion() << endl << endl;
+			int choiceNum;
+			for (int i = 0; i < answerChoices.size(); i++) {
+				choiceNum = i + 1;
+				cout << choiceNum << ") " << answerChoices[i] << endl;
 			}
 
-			//JANIATORS CLOSET
-			if (NOUN_MATCH == JANIATORSCLOSET)
-			{
-				if (loc == HALLWAY11 || loc == JANIATORSCLOSET)
-				{
-					if (door_state == false)
-					{
-						door_state = true;
-						rms[HALLWAY11].exits_to_room[NORTH] = JANIATORSCLOSET;
-						rms[JANIATORSCLOSET].exits_to_room[SOUTH] = HALLWAY11;
-						nns[JAN_CLOSET_DOOR].description.clear();
-						nns[JAN_CLOSET_DOOR].description.assign("an open janiators closet door");
-						cout << "I have opened the door." << endl;
-						return true;
-					}
-					else if (door_state == true)
-					{
-						cout << "The door is already open." << endl;
-						return true;
-					}
+			cin >> input;
+			if (input == question.getCorrectChoice()) {
+				if (currentLevel < 4) {
+					currentLevel++;
+					cout << "Correct! You've earned " << question.getPointsValue() << " points! You have been upgraded to level " << currentLevel << " questions\n";
+					score = score + question.getPointsValue();
+					break;
 				}
-				else
-				{
-					cout << "There is no door to open here." << endl;
-					return true;
+				else {
+					cout << "Correct! You've earned " << question.getPointsValue() << " points! You will get another level 4 question.\n";
+					score = score + question.getPointsValue();
+					break;
 				}
+
 			}
-			else
-			{
-				cout << "Opening that is not possible." << endl;
-				return true;
+			else {
+				if (currentLevel > 1) {
+					currentLevel--;
+					cout << "Wrong! You've earned 0 points. You have been downgraded to a level " << currentLevel << " questions." << endl;
+					break;
+				}
+				else {
+					cout << "Wrong! You've earned 0 points. You will get another level 1 question.\n";
+					break;
+				}
 			}
 
-
-			//classroom 206
-			if (NOUN_MATCH == CLASSROOM206)
-			{
-				if (loc == HALLWAY2 || loc == CLASSROOM202)
-				{
-					if (door_state == false)
-					{
-						door_state = true;
-						rms[HALLWAY2].exits_to_room[NORTH] = CLASSROOM206;
-						rms[CLASSROOM202].exits_to_room[SOUTH] = HALLWAY2;
-						nns[CR206_DOOR].description.clear();
-						nns[CR206_DOOR].description.assign("an open class room door");
-						cout << "I have opened the door." << endl;
-						return true;
-					}
-					else if (door_state == true)
-					{
-						cout << "The door is already open." << endl;
-						return true;
-					}
-				}
-				else
-				{
-					cout << "There is no door to open here." << endl;
-					return true;
-				}
-			}
-			else
-			{
-				cout << "Opening that is not possible." << endl;
-				return true;
-			}
 		}
 
-		//classroom 301
-		if (NOUN_MATCH == CLASSROOM301)
+		//SCI LAB
+		if (NOUN_MATCH == SCI_LAB_DOOR)
 		{
-			if (loc == HALLWAY6 || loc == CLASSROOM301)
+			static bool door_state = false; //false is a closed door.
+			if (loc == PATHWAY || loc == SCIENCELAB)
 			{
 				if (door_state == false)
 				{
 					door_state = true;
-					rms[HALLWAY6].exits_to_room[NORTH] = CLASSROOM301;
-					rms[CLASSROOM301].exits_to_room[SOUTH] = HALLWAY6;
-					nns[CR301_DOOR].description.clear();
-					nns[CR301_DOOR].description.assign("an open class room door");
+					rms[PATHWAY].exits_to_room[SOUTH] = SCIENCELAB;
+					rms[SCIENCELAB].exits_to_room[NORTH] = PATHWAY;
+					nns[SCI_LAB_DOOR].description.clear();
+					nns[SCI_LAB_DOOR].description.assign("an open science lab door");
 					cout << "I have opened the door." << endl;
 					return true;
 				}
@@ -857,24 +778,21 @@ bool parser(int &loc, string wd1, string wd2, terms *dir, terms *vbs, room *rms,
 				return true;
 			}
 		}
-		else
-		{
-			cout << "Opening that is not possible." << endl;
-			return true;
-		}
+		
 
-		//classroom 303
-		if (NOUN_MATCH == CLASSROOM303)
+		//classroom 202
+		else if (NOUN_MATCH == CR202_DOOR)
 		{
-			if (loc == HALLWAY7 || loc == CLASSROOM303)
+			static bool door_state = false; //false is a closed door.
+			if (loc == CLASSROOM202 || loc == HALLWAY1)
 			{
 				if (door_state == false)
 				{
 					door_state = true;
-					rms[HALLWAY7].exits_to_room[NORTH] = CLASSROOM303;
-					rms[CLASSROOM303].exits_to_room[SOUTH] = HALLWAY7;
-					nns[CR303_DOOR].description.clear();
-					nns[CR303_DOOR].description.assign("an open class room door");
+					rms[HALLWAY1].exits_to_room[SOUTH] = CLASSROOM202;
+					rms[CLASSROOM202].exits_to_room[NORTH] = HALLWAY1;
+					nns[CR202_DOOR].description.clear();
+					nns[CR202_DOOR].description.assign("an open class room door");
 					cout << "I have opened the door." << endl;
 					return true;
 				}
@@ -890,25 +808,19 @@ bool parser(int &loc, string wd1, string wd2, terms *dir, terms *vbs, room *rms,
 				return true;
 			}
 		}
-		else
+		//classroom 206
+		else if (NOUN_MATCH == CR206_DOOR)
 		{
-			cout << "Opening that is not possible." << endl;
-			return true;
-		}
-
-
-		//classroom 305
-		if (NOUN_MATCH == CLASSROOM305)
-		{
-			if (loc == HALLWAY8 || loc == CLASSROOM305)
+			static bool door_state = false; //false is a closed door.
+			if (loc == HALLWAY2 || loc == CLASSROOM202)
 			{
 				if (door_state == false)
 				{
 					door_state = true;
-					rms[HALLWAY8].exits_to_room[SOUTH] = CLASSROOM305;
-					rms[CLASSROOM305].exits_to_room[NORTH] = HALLWAY8;
-					nns[CR305_DOOR].description.clear();
-					nns[CR305_DOOR].description.assign("an open class room door");
+					rms[HALLWAY2].exits_to_room[NORTH] = CLASSROOM206;
+					rms[CLASSROOM202].exits_to_room[SOUTH] = HALLWAY2;
+					nns[CR206_DOOR].description.clear();
+					nns[CR206_DOOR].description.assign("an open class room door");
 					cout << "I have opened the door." << endl;
 					return true;
 				}
@@ -924,24 +836,20 @@ bool parser(int &loc, string wd1, string wd2, terms *dir, terms *vbs, room *rms,
 				return true;
 			}
 		}
-		else
+		
+		//JANIATORS CLOSET
+		else if (NOUN_MATCH == JAN_CLOSET_DOOR)
 		{
-			cout << "Opening that is not possible." << endl;
-			return true;
-		}
-
-		//classroom 307
-		if (NOUN_MATCH == CLASSROOM307)
-		{
-			if (loc == HALLWAY9 || loc == CLASSROOM307)
+			static bool door_state = false; //false is a closed door.
+			if (loc == HALLWAY11 || loc == JANIATORSCLOSET)
 			{
 				if (door_state == false)
 				{
 					door_state = true;
-					rms[HALLWAY9].exits_to_room[SOUTH] = CLASSROOM307;
-					rms[CLASSROOM307].exits_to_room[NORTH] = HALLWAY9;
-					nns[CR307_DOOR].description.clear();
-					nns[CR307_DOOR].description.assign("an open class room door");
+					rms[HALLWAY11].exits_to_room[NORTH] = JANIATORSCLOSET;
+					rms[JANIATORSCLOSET].exits_to_room[SOUTH] = HALLWAY11;
+					nns[JAN_CLOSET_DOOR].description.clear();
+					nns[JAN_CLOSET_DOOR].description.assign("an open janiators closet door");
 					cout << "I have opened the door." << endl;
 					return true;
 				}
@@ -957,110 +865,211 @@ bool parser(int &loc, string wd1, string wd2, terms *dir, terms *vbs, room *rms,
 				return true;
 			}
 		}
-		else
-		{
-			cout << "Opening that is not possible." << endl;
-			return true;
-		}
+		
 
-		//STORE ROOM
-		if (NOUN_MATCH == STOREROOM)
+	//classroom 301
+	else if (NOUN_MATCH == CR301_DOOR)
+	{
+		static bool door_state = false; //false is a closed door.
+		if (loc == HALLWAY6 || loc == CLASSROOM301)
 		{
-			if (loc == HALLWAY4 || loc == STOREROOM)
+			if (door_state == false)
 			{
-				if (door_state == false)
-				{
-					door_state = true;
-					rms[HALLWAY4].exits_to_room[SOUTH] = STOREROOM;
-					rms[STOREROOM].exits_to_room[NORTH] = HALLWAY4;
-					nns[SR_DOOR].description.clear();
-					nns[SR_DOOR].description.assign("an open store room door");
-					cout << "I have opened the door." << endl;
-					return true;
-				}
-				else if (door_state == true)
-				{
-					cout << "The door is already open." << endl;
-					return true;
-				}
+				door_state = true;
+				rms[HALLWAY6].exits_to_room[NORTH] = CLASSROOM301;
+				rms[CLASSROOM301].exits_to_room[SOUTH] = HALLWAY6;
+				nns[CR301_DOOR].description.clear();
+				nns[CR301_DOOR].description.assign("an open class room door");
+				cout << "I have opened the door." << endl;
+				return true;
 			}
-			else
+			else if (door_state == true)
 			{
-				cout << "There is no door to open here." << endl;
+				cout << "The door is already open." << endl;
 				return true;
 			}
 		}
 		else
 		{
-			cout << "Opening that is not possible." << endl;
+			cout << "There is no door to open here." << endl;
 			return true;
 		}
-
-		//CAFETERIA
-		if (NOUN_MATCH == CAFETERIA)
+	}
+	//classroom 303
+	else if (NOUN_MATCH == CR303_DOOR)
+	{
+		static bool door_state = false; //false is a closed door.
+		if (loc == HALLWAY7 || loc == CLASSROOM303)
 		{
-			if (loc == HALLWAY3 || loc == CAFETERIA)
+			if (door_state == false)
 			{
-				if (door_state == false)
-				{
-					door_state = true;
-					rms[HALLWAY3].exits_to_room[NORTH] = CAFETERIA;
-					rms[CAFETERIA].exits_to_room[SOUTH] = HALLWAY3;
-					nns[CAFETERIA_DOOR].description.clear();
-					nns[CAFETERIA_DOOR].description.assign("an open store room door");
-					cout << "I have opened the door." << endl;
-					return true;
-				}
-				else if (door_state == true)
-				{
-					cout << "The door is already open." << endl;
-					return true;
-				}
+				door_state = true;
+				rms[HALLWAY7].exits_to_room[NORTH] = CLASSROOM303;
+				rms[CLASSROOM303].exits_to_room[SOUTH] = HALLWAY7;
+				nns[CR303_DOOR].description.clear();
+				nns[CR303_DOOR].description.assign("an open class room door");
+				cout << "I have opened the door." << endl;
+				return true;
 			}
-			else
+			else if (door_state == true)
 			{
-				cout << "There is no door to open here." << endl;
+				cout << "The door is already open." << endl;
 				return true;
 			}
 		}
 		else
 		{
-			cout << "Opening that is not possible." << endl;
+			cout << "There is no door to open here." << endl;
 			return true;
 		}
-
-		//GYM
-		if (NOUN_MATCH == GYM)
+	}
+	//classroom 305
+	else if (NOUN_MATCH == CR305_DOOR)
+	{
+		static bool door_state = false; //false is a closed door.
+		if (loc == HALLWAY8 || loc == CLASSROOM305)
 		{
-			if (loc == HALLWAY10 || loc == GYM)
+			if (door_state == false)
 			{
-				if (door_state == false)
-				{
-					door_state = true;
-					rms[HALLWAY10].exits_to_room[NORTH] = GYM;
-					rms[GYM].exits_to_room[SOUTH] = HALLWAY10;
-					nns[GYM_DOOR].description.clear();
-					nns[GYM_DOOR].description.assign("an open GYM door");
-					cout << "I have opened the door." << endl;
-					return true;
-				}
-				else if (door_state == true)
-				{
-					cout << "The door is already open." << endl;
-					return true;
-				}
+				door_state = true;
+				rms[HALLWAY8].exits_to_room[SOUTH] = CLASSROOM305;
+				rms[CLASSROOM305].exits_to_room[NORTH] = HALLWAY8;
+				nns[CR305_DOOR].description.clear();
+				nns[CR305_DOOR].description.assign("an open class room door");
+				cout << "I have opened the door." << endl;
+				return true;
 			}
-			else
+			else if (door_state == true)
 			{
-				cout << "There is no door to open here." << endl;
+				cout << "The door is already open." << endl;
 				return true;
 			}
 		}
 		else
 		{
-			cout << "Opening that is not possible." << endl;
+			cout << "There is no door to open here." << endl;
 			return true;
 		}
+	}
+	//classroom 307
+	else if (NOUN_MATCH == CR307_DOOR)
+	{
+		static bool door_state = false; //false is a closed door.
+		if (loc == HALLWAY9 || loc == CLASSROOM307)
+		{
+			if (door_state == false)
+			{
+				door_state = true;
+				rms[HALLWAY9].exits_to_room[SOUTH] = CLASSROOM307;
+				rms[CLASSROOM307].exits_to_room[NORTH] = HALLWAY9;
+				nns[CR307_DOOR].description.clear();
+				nns[CR307_DOOR].description.assign("an open class room door");
+				cout << "I have opened the door." << endl;
+				return true;
+			}
+			else if (door_state == true)
+			{
+				cout << "The door is already open." << endl;
+				return true;
+			}
+		}
+		else
+		{
+			cout << "There is no door to open here." << endl;
+			return true;
+		}
+	}
+	//STORE ROOM
+	else if (NOUN_MATCH == SR_DOOR)
+	{
+		static bool door_state = false; //false is a closed door.
+		if (loc == HALLWAY4 || loc == STOREROOM)
+		{
+			if (door_state == false)
+			{
+				door_state = true;
+				rms[HALLWAY4].exits_to_room[SOUTH] = STOREROOM;
+				rms[STOREROOM].exits_to_room[NORTH] = HALLWAY4;
+				nns[SR_DOOR].description.clear();
+				nns[SR_DOOR].description.assign("an open store room door");
+				cout << "I have opened the door." << endl;
+				return true;
+			}
+			else if (door_state == true)
+			{
+				cout << "The door is already open." << endl;
+				return true;
+			}
+		}
+		else
+		{
+			cout << "There is no door to open here." << endl;
+			return true;
+		}
+	}
+	//CAFETERIA
+	else if (NOUN_MATCH == CAFETERIA_DOOR)
+	{
+		static bool door_state = false; //false is a closed door.
+		if (loc == HALLWAY3 || loc == CAFETERIA)
+		{
+			if (door_state == false)
+			{
+				door_state = true;
+				rms[HALLWAY3].exits_to_room[NORTH] = CAFETERIA;
+				rms[CAFETERIA].exits_to_room[SOUTH] = HALLWAY3;
+				nns[CAFETERIA_DOOR].description.clear();
+				nns[CAFETERIA_DOOR].description.assign("an open store room door");
+				cout << "I have opened the door." << endl;
+				return true;
+			}
+			else if (door_state == true)
+			{
+				cout << "The door is already open." << endl;
+				return true;
+			}
+		}
+		else
+		{
+			cout << "There is no door to open here." << endl;
+			return true;
+		}
+	}
+	//GYM
+	else if (NOUN_MATCH == GYM_DOOR)
+	{
+		static bool door_state = false; //false is a closed door.
+		if (loc == HALLWAY10 || loc == GYM)
+		{
+			if (door_state == false)
+			{
+				door_state = true;
+				rms[HALLWAY10].exits_to_room[NORTH] = GYM;
+				rms[GYM].exits_to_room[SOUTH] = HALLWAY10;
+				nns[GYM_DOOR].description.clear();
+				nns[GYM_DOOR].description.assign("an open GYM door");
+				cout << "I have opened the door." << endl;
+				return true;
+			}
+			else if (door_state == true)
+			{
+				cout << "The door is already open." << endl;
+				return true;
+			}
+		}
+		else
+		{
+			cout << "There is no door to open here." << endl;
+			return true;
+		}
+	}
+	else
+	{
+		cout << "Opening that is not possible." << endl;
+		return true;
+	}
+	
+}
 
 		return false;
 
@@ -1116,7 +1125,7 @@ int main()
 				cout << "\nPossible directions to travel";
 				cout << "\nNorth \nSouth \nWest \nEast \n";
 				cout << "\nPossible actions";
-				cout << "\nOPEN DOOR, EXAMINE, LOOK AROUND\n";
+				cout << "\nOPEN ROOM (Must be spcefic), EXAMINE, LOOK AROUND\n";
 				cout << "SCORE:";
 				cout << score << "\n";
 				getline(cin, command);
@@ -1152,7 +1161,7 @@ int main()
 /**************************************************************************************
 *Known issues: When the user is prompt for a question upon opening a door the program
 *acts as if there was an invalid command given after the answering of a question.
-*Only one door is working after modifications
+*
 *Possible future functions: Pick up items, have an inventory to hold said items.
 *Link questions with spesific clues that could be found in each room. Would need to preload 
 *the question per room
