@@ -632,6 +632,61 @@ bool parser(int &loc, string wd1, string wd2, terms *dir, terms *vbs, room *rms,
 	//examine verb
 	if (VERB_ACTION == EXAMINE)
 	{
+
+		int input;
+
+		while (true)
+		{
+			//call the question
+			if (currentLevel == 1) {
+				question = bank.getLevel1Question();
+			}
+			else if (currentLevel == 2) {
+				question = bank.getLevel2Question();
+			}
+			else if (currentLevel == 3) {
+				question = bank.getLevel3Question();
+			}
+			else{
+				question = bank.getLevel4Question();
+			}
+
+			answerChoices = question.getAnswers();
+			cout << question.getQuestion() << endl << endl;
+			int choiceNum;
+			for (int i = 0; i < answerChoices.size(); i++) {
+				choiceNum = i + 1;
+				cout << choiceNum << ") " << answerChoices[i] << endl;
+			}
+
+			cin >> input;
+			if (input == question.getCorrectChoice()) {
+				if (currentLevel < 4) {
+					currentLevel++;
+					cout << "Correct! You've earned " << question.getPointsValue() << " points! You have been upgraded to level " << currentLevel << " questions\n";
+					score = score + question.getPointsValue();
+					break;
+				}
+				else {
+					cout << "Correct! You've earned " << question.getPointsValue() << " points! You will get another level 4 question.\n";
+					score = score + question.getPointsValue();
+					break;
+				}
+
+			}
+			else {
+				if (currentLevel > 1) {
+					currentLevel--;
+					cout << "Wrong! You've earned 0 points. You have been downgraded to a level " << currentLevel << " questions." << endl;
+					break;
+				}
+				else {
+					cout << "Wrong! You've earned 0 points. You will get another level 1 question.\n";
+					break;
+				}
+			}
+
+		}
 		examine_objects(loc, nns);
 		return true;
 	}
