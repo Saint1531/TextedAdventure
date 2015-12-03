@@ -1,8 +1,31 @@
 // Chad Vanden Heuvel & Landon Rehn
 // CS 371 Project 2
 
+/*
+_____________________ ________    _________ ___ ___  
+\_   _____/\______   \\_____  \  /   _____//   |   \ 
+ |    __)   |       _/ /   |   \ \_____  \/    ~    \
+ |     \    |    |   \/    |    \/        \    Y    /
+ \___  /    |____|_  /\_______  /_______  /\___|_  / 
+     \/            \/         \/        \/       \/  
+
+ _________ .__                .___ ____   ____                  .___                ___ ___                            .__      ____    .____                       .___              __________       .__
+ \_   ___ \|  |__ _____     __| _/ \   \ /   /____    ____    __| _/____   ____    /   |   \   ____  __ _____  __ ____ |  |    /  _ \   |    |   _____    ____    __| _/____   ____   \______   \ ____ |  |__   ____
+ /    \  \/|  |  \\__  \   / __ |   \   Y   /\__  \  /    \  / __ |/ __ \ /    \  /    ~    \_/ __ \|  |  \  \/ // __ \|  |    >  _ </\ |    |   \__  \  /    \  / __ |/  _ \ /    \   |       _// __ \|  |  \ /    \
+ \     \___|   Y  \/ __ \_/ /_/ |    \     /  / __ \|   |  \/ /_/ \  ___/|   |  \ \    Y    /\  ___/|  |  /\   /\  ___/|  |__ /  <_\ \/ |    |___ / __ \|   |  \/ /_/ (  <_> )   |  \  |    |   \  ___/|   Y  \   |  \
+  \______  /___|  (____  /\____ |     \___/  (____  /___|  /\____ |\___  >___|  /  \___|_  /  \___  >____/  \_/  \___  >____/ \_____\ \ |_______ (____  /___|  /\____ |\____/|___|  /  |____|_  /\___  >___|  /___|  /
+         \/     \/     \/      \/                 \/     \/      \/    \/     \/         \/       \/                 \/              \/         \/    \/     \/      \/           \/          \/     \/     \/     \/
 
 
+		 _________   _________ _________________  ____  __________                   __               __    ________
+		 \_   ___ \ /   _____/ \_____  \______  \/_   | \______   \_______  ____    |__| ____   _____/  |_  \_____  \
+		 /    \  \/ \_____  \    _(__  <   /    / |   |  |     ___/\_  __ \/  _ \   |  |/ __ \_/ ___\   __\  /  ____/
+		 \     \____/        \  /       \ /    /  |   |  |    |     |  | \(  <_> )  |  \  ___/\  \___|  |   /       \
+		  \______  /_______  / /______  //____/   |___|  |____|     |__|   \____/\__|  |\___  >\___  >__|   \_______ \
+		         \/        \/         \/                                        \______|    \/     \/               \/
+
+
+*/
 
 #include <iostream>
 #include <string>
@@ -32,7 +55,7 @@ enum en_ROOMS { SCIENCELAB, CLASSROOM202, START, HALLWAY1, CAFETERIA,
 				HALLWAY11, CLASSROOM301, CLASSROOM303, CLASSROOM305, CLASSROOM307, 
 				KITCHEN, PATHWAY };
 
-enum en_VERBS { GET, DROP, USE, OPEN, CLOSE, EXAMINE, INVENTORY, LOOK };
+enum en_VERBS { OPEN, CLOSE, EXAMINE, LOOK};
 
 //DOORS FOR QUESTIONS, OBJECTS FOR STORY
 enum en_NOUNS { JAN_CLOSET_DOOR,SCI_LAB_DOOR,CR202_DOOR,CAFETERIA_DOOR,KITCHEN_DOOR,SR_DOOR,
@@ -44,7 +67,7 @@ enum en_NOUNS { JAN_CLOSET_DOOR,SCI_LAB_DOOR,CR202_DOOR,CAFETERIA_DOOR,KITCHEN_D
 const int NONE = -1;
 const int DIRS = 4;
 const int ROOMS = 25;
-const int VERBS = 8;
+const int VERBS = 4;
 const int NOUNS = 26;
 
 //"struct" the things
@@ -102,7 +125,7 @@ void set_rooms(room *rms)
 	rms[SCIENCELAB].exits_to_room[WEST] = NONE;
 
 	rms[CLASSROOM202].description.assign("Classroom 202");
-	rms[CLASSROOM202].exits_to_room[NORTH] = NONE;
+	rms[CLASSROOM202].exits_to_room[NORTH] = HALLWAY1;
 	rms[CLASSROOM202].exits_to_room[EAST] = HALLWAY2;
 	rms[CLASSROOM202].exits_to_room[SOUTH] = NONE;
 	rms[CLASSROOM202].exits_to_room[WEST] = NONE;
@@ -110,47 +133,47 @@ void set_rooms(room *rms)
 	rms[CLASSROOM206].description.assign("Classroom 206");
 	rms[CLASSROOM206].exits_to_room[NORTH] = HALLWAY3;
 	rms[CLASSROOM206].exits_to_room[EAST] = NONE;
-	rms[CLASSROOM206].exits_to_room[SOUTH] = NONE;
+	rms[CLASSROOM206].exits_to_room[SOUTH] = HALLWAY2;
 	rms[CLASSROOM206].exits_to_room[WEST] = NONE;
 
 	rms[CLASSROOM301].description.assign("Classroom 301");
 	rms[CLASSROOM301].exits_to_room[NORTH] = HALLWAY7;
 	rms[CLASSROOM301].exits_to_room[EAST] = NONE;
-	rms[CLASSROOM301].exits_to_room[SOUTH] = NONE;
+	rms[CLASSROOM301].exits_to_room[SOUTH] = HALLWAY6;
 	rms[CLASSROOM301].exits_to_room[WEST] = NONE;
 
 	rms[CLASSROOM303].description.assign("Classroom 303");
 	rms[CLASSROOM303].exits_to_room[NORTH] = NONE;
 	rms[CLASSROOM303].exits_to_room[EAST] = EAST;
-	rms[CLASSROOM303].exits_to_room[SOUTH] = NONE;
+	rms[CLASSROOM303].exits_to_room[SOUTH] = HALLWAY7;
 	rms[CLASSROOM303].exits_to_room[WEST] = NONE;
 
 	rms[CLASSROOM305].description.assign("Classroom 305");
-	rms[CLASSROOM305].exits_to_room[NORTH] = NONE;
+	rms[CLASSROOM305].exits_to_room[NORTH] = HALLWAY8;
 	rms[CLASSROOM305].exits_to_room[EAST] = NONE;
 	rms[CLASSROOM305].exits_to_room[SOUTH] = HALLWAY9;
 	rms[CLASSROOM305].exits_to_room[WEST] = NONE;
 
 	rms[CLASSROOM307].description.assign("Classroom 307");
-	rms[CLASSROOM307].exits_to_room[NORTH] = NONE;
+	rms[CLASSROOM307].exits_to_room[NORTH] = HALLWAY9;
 	rms[CLASSROOM307].exits_to_room[EAST] = HALLWAY10;
 	rms[CLASSROOM307].exits_to_room[SOUTH] = NONE;
 	rms[CLASSROOM307].exits_to_room[WEST] = NONE;
 
 	rms[KITCHEN].description.assign("Kitchen");
-	rms[KITCHEN].exits_to_room[NORTH] = NONE;
+	rms[KITCHEN].exits_to_room[NORTH] = HALLWAY5;
 	rms[KITCHEN].exits_to_room[EAST] = HALLWAY6;
 	rms[KITCHEN].exits_to_room[SOUTH] = NONE;
 	rms[KITCHEN].exits_to_room[WEST] = NONE;
 
 	rms[CAFETERIA].description.assign("Cafateria");
 	rms[CAFETERIA].exits_to_room[NORTH] = NONE;
-	rms[CAFETERIA].exits_to_room[EAST] = NONE;
-	rms[CAFETERIA].exits_to_room[SOUTH] = NONE;
-	rms[CAFETERIA].exits_to_room[WEST] = HALLWAY4;
+	rms[CAFETERIA].exits_to_room[EAST] = HALLWAY4;
+	rms[CAFETERIA].exits_to_room[SOUTH] = HALLWAY3;
+	rms[CAFETERIA].exits_to_room[WEST] = NONE;
 
 	rms[STOREROOM].description.assign("School Store Room");
-	rms[STOREROOM].exits_to_room[NORTH] = NONE;
+	rms[STOREROOM].exits_to_room[NORTH] = HALLWAY4;
 	rms[STOREROOM].exits_to_room[EAST] = NONE;
 	rms[STOREROOM].exits_to_room[SOUTH] = HALLWAY5;
 	rms[STOREROOM].exits_to_room[WEST] = NONE;
@@ -158,29 +181,29 @@ void set_rooms(room *rms)
 	rms[GYM].description.assign("Gym");
 	rms[GYM].exits_to_room[NORTH] = HALLWAY11;
 	rms[GYM].exits_to_room[EAST] = NONE;
-	rms[GYM].exits_to_room[SOUTH] = NONE;
+	rms[GYM].exits_to_room[SOUTH] = HALLWAY10;
 	rms[GYM].exits_to_room[WEST] = NONE;
 
 	rms[JANIATORSCLOSET].description.assign("Janitors Closet");
 	rms[JANIATORSCLOSET].exits_to_room[NORTH] = NONE;
 	rms[JANIATORSCLOSET].exits_to_room[EAST] = NONE;
-	rms[JANIATORSCLOSET].exits_to_room[SOUTH] = NONE;
+	rms[JANIATORSCLOSET].exits_to_room[SOUTH] = HALLWAY11;
 	rms[JANIATORSCLOSET].exits_to_room[WEST] = NONE;
 
 	rms[HALLWAY1].description.assign("Hallway 1");
 	rms[HALLWAY1].exits_to_room[NORTH] = SCIENCELAB;
 	rms[HALLWAY1].exits_to_room[EAST] = NONE;
-	rms[HALLWAY1].exits_to_room[SOUTH] = NONE;
+	rms[HALLWAY1].exits_to_room[SOUTH] = CLASSROOM202;
 	rms[HALLWAY1].exits_to_room[WEST] = NONE;
 
 	rms[HALLWAY2].description.assign("Hallway 2");
-	rms[HALLWAY2].exits_to_room[NORTH] = NONE;
+	rms[HALLWAY2].exits_to_room[NORTH] = CLASSROOM206;
 	rms[HALLWAY2].exits_to_room[EAST] = NONE;
 	rms[HALLWAY2].exits_to_room[SOUTH] = NONE;
 	rms[HALLWAY2].exits_to_room[WEST] = CLASSROOM202;
 
 	rms[HALLWAY3].description.assign("Hallway 3");
-	rms[HALLWAY3].exits_to_room[NORTH] = NONE;
+	rms[HALLWAY3].exits_to_room[NORTH] = CAFETERIA;
 	rms[HALLWAY3].exits_to_room[EAST] = NONE;
 	rms[HALLWAY3].exits_to_room[SOUTH] = CLASSROOM206;
 	rms[HALLWAY3].exits_to_room[WEST] = NONE;
@@ -188,23 +211,23 @@ void set_rooms(room *rms)
 	rms[HALLWAY4].description.assign("Hallway 4");
 	rms[HALLWAY4].exits_to_room[NORTH] = NONE;
 	rms[HALLWAY4].exits_to_room[EAST] = NONE;
-	rms[HALLWAY4].exits_to_room[SOUTH] = NONE;
+	rms[HALLWAY4].exits_to_room[SOUTH] = STOREROOM;
 	rms[HALLWAY4].exits_to_room[WEST] = CAFETERIA;
 
 	rms[HALLWAY5].description.assign("Hallway 5");
 	rms[HALLWAY5].exits_to_room[NORTH] = STOREROOM;
 	rms[HALLWAY5].exits_to_room[EAST] = NONE;
-	rms[HALLWAY5].exits_to_room[SOUTH] = NONE;
+	rms[HALLWAY5].exits_to_room[SOUTH] = KITCHEN;
 	rms[HALLWAY5].exits_to_room[WEST] = NONE;
 
 	rms[HALLWAY6].description.assign("Hallway 6");
-	rms[HALLWAY6].exits_to_room[NORTH] = NONE;
+	rms[HALLWAY6].exits_to_room[NORTH] = CLASSROOM301;
 	rms[HALLWAY6].exits_to_room[EAST] = NONE;
 	rms[HALLWAY6].exits_to_room[SOUTH] = NONE;
 	rms[HALLWAY6].exits_to_room[WEST] = KITCHEN;
 
 	rms[HALLWAY7].description.assign("Hallway 7");
-	rms[HALLWAY7].exits_to_room[NORTH] = NONE;
+	rms[HALLWAY7].exits_to_room[NORTH] = CLASSROOM303;
 	rms[HALLWAY7].exits_to_room[EAST] = NONE;
 	rms[HALLWAY7].exits_to_room[SOUTH] = CLASSROOM301;
 	rms[HALLWAY7].exits_to_room[WEST] = NONE;
@@ -212,7 +235,7 @@ void set_rooms(room *rms)
 	rms[HALLWAY8].description.assign("Hallway 8");
 	rms[HALLWAY8].exits_to_room[NORTH] = NONE;
 	rms[HALLWAY8].exits_to_room[EAST] = NONE;
-	rms[HALLWAY8].exits_to_room[SOUTH] = NONE;
+	rms[HALLWAY8].exits_to_room[SOUTH] = CLASSROOM305;
 	rms[HALLWAY8].exits_to_room[WEST] = CLASSROOM303;
 
 	rms[HALLWAY9].description.assign("Hallway 9");
@@ -222,13 +245,13 @@ void set_rooms(room *rms)
 	rms[HALLWAY9].exits_to_room[WEST] = NONE;
 
 	rms[HALLWAY10].description.assign("Hallway 10");
-	rms[HALLWAY10].exits_to_room[NORTH] = NONE;
+	rms[HALLWAY10].exits_to_room[NORTH] = GYM;
 	rms[HALLWAY10].exits_to_room[EAST] = NONE;
 	rms[HALLWAY10].exits_to_room[SOUTH] = NONE;
 	rms[HALLWAY10].exits_to_room[WEST] = CLASSROOM307;
 
 	rms[HALLWAY11].description.assign("Hallway 11");
-	rms[HALLWAY11].exits_to_room[NORTH] = NONE;
+	rms[HALLWAY11].exits_to_room[NORTH] = JANIATORSCLOSET;
 	rms[HALLWAY11].exits_to_room[EAST] = NONE;
 	rms[HALLWAY11].exits_to_room[SOUTH] = GYM;
 	rms[HALLWAY11].exits_to_room[WEST] = NONE;
@@ -253,27 +276,17 @@ void set_directions(terms *dir)
 }
 
 // -------------------------------------------------------------------------------------------------
-
-//possible actions, will only prob end up using half of these
 void set_verbs(terms *vbs)
 {
-	// enum en_VERBS {GET, DROP, USE, OPEN, CLOSE, EXAMINE, INVENTORY, LOOK};
-	vbs[GET].code = GET;
-	vbs[GET].word = "GET";
-	vbs[DROP].code = DROP;
-	vbs[DROP].word = "DROP";
-	vbs[USE].code = USE;
-	vbs[USE].word = "USE";
 	vbs[OPEN].code = OPEN;
 	vbs[OPEN].word = "OPEN";
 	vbs[CLOSE].code = CLOSE;
 	vbs[CLOSE].word = "CLOSE";
 	vbs[EXAMINE].code = EXAMINE;
 	vbs[EXAMINE].word = "EXAMINE";
-	vbs[INVENTORY].code = INVENTORY;
-	vbs[INVENTORY].word = "INVENTORY";
 	vbs[LOOK].code = LOOK;
 	vbs[LOOK].word = "LOOK";
+
 }
 
 // -------------------------------------------------------------------------------------------------
@@ -294,7 +307,7 @@ void set_nouns(noun *nns)
 	nns[JAN_CLOSET_DOOR].can_carry = false;
 	nns[JAN_CLOSET_DOOR].location = JANIATORSCLOSET;
 
-	nns[SCI_LAB_DOOR].word = "DOOR";
+	nns[SCI_LAB_DOOR].word = "lab";
 	nns[SCI_LAB_DOOR].code = SCI_LAB_DOOR;
 	nns[SCI_LAB_DOOR].description = "a closed science lab door";
 	nns[SCI_LAB_DOOR].can_carry = false;
@@ -302,9 +315,9 @@ void set_nouns(noun *nns)
 
 	nns[CR202_DOOR].word = "DOOR";
 	nns[CR202_DOOR].code = CR202_DOOR;
-	nns[CR202_DOOR].description = "classroxom 202's door";
+	nns[CR202_DOOR].description = "classroom 202's door";
 	nns[CR202_DOOR].can_carry = false;
-	nns[CR202_DOOR].location = CLASSROOM202;
+	nns[CR202_DOOR].location = HALLWAY1;
 
 	nns[CR206_DOOR].word = "DOOR";
 	nns[CR206_DOOR].code = CR206_DOOR;
@@ -543,6 +556,8 @@ void examine_objects(int loc,  noun *nns)
 	}
 }
 
+
+
 // ----------------------------------------------------------------------------------------
 
 //back bone of the program
@@ -617,15 +632,7 @@ bool parser(int &loc, string wd1, string wd2, terms *dir, terms *vbs, room *rms,
 	//examine verb
 	if (VERB_ACTION == EXAMINE)
 	{
-		examine_objects(loc,nns);
-		return true;
-	}
-	
-	//actions for usage of VERB OPEN
-	//questions would need to be prompted in here I believe
-	if (VERB_ACTION == OPEN)
-	{
-
+		
 		int input;
 
 		while (true)
@@ -658,12 +665,12 @@ bool parser(int &loc, string wd1, string wd2, terms *dir, terms *vbs, room *rms,
 					currentLevel++;
 					cout << "Correct! You've earned " << question.getPointsValue() << " points! You have been upgraded to level " << currentLevel << " questions\n";
 					score = score + question.getPointsValue();
-					
+					break;
 				}
 				else {
 					cout << "Correct! You've earned " << question.getPointsValue() << " points! You will get another level 4 question.\n";
 					score = score + question.getPointsValue();
-					
+					break;
 				}
 
 			}
@@ -671,11 +678,23 @@ bool parser(int &loc, string wd1, string wd2, terms *dir, terms *vbs, room *rms,
 				if (currentLevel > 1) {
 					currentLevel--;
 					cout << "Wrong! You've earned 0 points. You have been downgraded to a level " << currentLevel << " questions." << endl;
+					break;
 				}
 				else {
 					cout << "Wrong! You've earned 0 points. You will get another level 1 question.\n";
+					break;
 				}
 			}
+			
+		}
+		examine_objects(loc, nns);
+		return true;
+	}
+
+	
+	//actions for usage of VERB OPEN
+	if (VERB_ACTION == OPEN)
+	{
 
 			//SCI LAB
 			if (NOUN_MATCH == SCIENCELAB)
@@ -689,6 +708,39 @@ bool parser(int &loc, string wd1, string wd2, terms *dir, terms *vbs, room *rms,
 						rms[SCIENCELAB].exits_to_room[NORTH] = PATHWAY;
 						nns[SCI_LAB_DOOR].description.clear();
 						nns[SCI_LAB_DOOR].description.assign("an open science lab door");
+						cout << "I have opened the door." << endl;
+						return true;
+					}
+					else if (door_state == true)
+					{
+						cout << "The door is already open." << endl;
+						return true;
+					}
+				}
+				else
+				{
+					cout << "There is no door to open here." << endl;
+					return true;
+				}
+			}
+			else
+			{
+				cout << "Opening that is not possible." << endl;
+				return true;
+			}
+
+			//classroom 202
+			if (NOUN_MATCH == CLASSROOM202)
+			{
+				if (loc == CLASSROOM202 || loc == HALLWAY1)
+				{
+					if (door_state == false)
+					{
+						door_state = true;
+						rms[HALLWAY1].exits_to_room[SOUTH] = CLASSROOM202;
+						rms[CLASSROOM202].exits_to_room[NORTH] = HALLWAY1;
+						nns[CR202_DOOR].description.clear();
+						nns[CR202_DOOR].description.assign("an open class room door");
 						cout << "I have opened the door." << endl;
 						return true;
 					}
@@ -743,38 +795,6 @@ bool parser(int &loc, string wd1, string wd2, terms *dir, terms *vbs, room *rms,
 				return true;
 			}
 
-			//classroom 202
-			if (NOUN_MATCH == CLASSROOM202)
-			{
-				if (loc == HALLWAY1 || loc == CLASSROOM202)
-				{
-					if (door_state == false)
-					{
-						door_state = true;
-						rms[HALLWAY1].exits_to_room[SOUTH] = CLASSROOM202;
-						rms[CLASSROOM202].exits_to_room[NORTH] = HALLWAY1;
-						nns[CR202_DOOR].description.clear();
-						nns[CR202_DOOR].description.assign("an open class room door");
-						cout << "I have opened the door." << endl;
-						return true;
-					}
-					else if (door_state == true)
-					{
-						cout << "The door is already open." << endl;
-						return true;
-					}
-				}
-				else
-				{
-					cout << "There is no door to open here." << endl;
-					return true;
-				}
-			}
-			else
-			{
-				cout << "Opening that is not possible." << endl;
-				return true;
-			}
 
 			//classroom 206
 			if (NOUN_MATCH == CLASSROOM206)
@@ -1042,9 +1062,8 @@ bool parser(int &loc, string wd1, string wd2, terms *dir, terms *vbs, room *rms,
 			return true;
 		}
 
-	}
-		
-	return false;
+		return false;
+
 }
 
 // ----------------------------------------------------------------------------------------
@@ -1072,12 +1091,12 @@ int main()
 
 	int choice;//Var to hold menu choices
 
-	
-
 	const int START_CHOICE = 1, END_CHOICE = 2; //Constants for menu choices
 
 	//Display the menu and get a choice from user
-	cout << "\t\tGame Menu\n\n";
+	cout << "\t\tWelcome to Frosh!\n\n";
+	cout << "\tIn this game you will be able to navigate a strange complex.\n";
+	cout << "\tAs you EXAMINE your surroundings you will be prompted to anwser \n\tquestions to expand your knowledge base.\n\n";
 	cout << "\t1. Start the game\n";
 	cout << "\t2. Quit the program\n";
 	//cout << "\t3. Score\n";
@@ -1098,7 +1117,8 @@ int main()
 				cout << "\nNorth \nSouth \nWest \nEast \n";
 				cout << "\nPossible actions";
 				cout << "\nOPEN DOOR, EXAMINE, LOOK AROUND\n";
-				cout  << score << "\n";
+				cout << "SCORE:";
+				cout << score << "\n";
 				getline(cin, command);
 				
 				
@@ -1131,7 +1151,8 @@ int main()
 
 /**************************************************************************************
 *Known issues: When the user is prompt for a question upon opening a door the program
-*acts as if there was an invalid command is given after the answering of a question 
+*acts as if there was an invalid command given after the answering of a question.
+*Only one door is working after modifications
 *Possible future functions: Pick up items, have an inventory to hold said items.
 *Link questions with spesific clues that could be found in each room. Would need to preload 
 *the question per room
