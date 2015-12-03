@@ -1,6 +1,9 @@
 // Chad Vanden Heuvel & Landon Rehn
 // CS 371 Project 2
 
+
+
+
 #include <iostream>
 #include <string>
 #include <vector>
@@ -34,14 +37,15 @@ enum en_VERBS { GET, DROP, USE, OPEN, CLOSE, EXAMINE, INVENTORY, LOOK };
 //DOORS FOR QUESTIONS, OBJECTS FOR STORY
 enum en_NOUNS { JAN_CLOSET_DOOR,SCI_LAB_DOOR,CR202_DOOR,CAFETERIA_DOOR,KITCHEN_DOOR,SR_DOOR,
 				CR206_DOOR,CR307_DOOR,CR305_DOOR,CR301_DOOR,CR303_DOOR, MAGNET, METER, MONEY, 
-				TEXTBOOK, DESK, GYM_DOOR};
+				TEXTBOOK, DESK, GYM_DOOR, IND_GRILL, LOCKER, TRAY, SIGN, COMPUTER, CHALKBOARD, 
+				GLOBE, MERRYGOROUND, PROJECTOR} ;
 
 
-const int NONE = -1;//these will break everything if they're not right
-const int DIRS = 4;//like no errors
-const int ROOMS = 25;//but crashes
+const int NONE = -1;
+const int DIRS = 4;
+const int ROOMS = 25;
 const int VERBS = 8;
-const int NOUNS = 17;
+const int NOUNS = 26;
 
 //"struct" the things
 struct terms
@@ -72,9 +76,13 @@ struct noun
 void set_rooms(room *rms)
 {
 
-	//enum en_ROOMS { SCIENCELAB, CLASSROOM202, START, HALLWAY1, CAFETERIA, HALLWAY2, STOREROOM, GYM, 
-	//HALLWAY3, CLASSROOM206, JANIATORSCLOSET, HALLWAY4, HALLWAY5, HALLWAY6, CLASSROOM301, CLASSROOM303, 
-	//CLASSROOM305, CLASSROOM307 };
+	//enum en_ROOMS {
+	//	SCIENCELAB, CLASSROOM202, START, HALLWAY1, CAFETERIA,
+	//	HALLWAY2, STOREROOM, GYM, HALLWAY3, CLASSROOM206, JANIATORSCLOSET,
+	//	HALLWAY4, HALLWAY5, HALLWAY6, HALLWAY7, HALLWAY8, HALLWAY9, HALLWAY10,
+	//	HALLWAY11, CLASSROOM301, CLASSROOM303, CLASSROOM305, CLASSROOM307,
+	//	KITCHEN, PATHWAY};
+
 	rms[START].description.assign("School parking lot"); //Starting zone
 	rms[START].exits_to_room[NORTH] = NONE;
 	rms[START].exits_to_room[EAST] = NONE;
@@ -95,9 +103,9 @@ void set_rooms(room *rms)
 
 	rms[CLASSROOM202].description.assign("Classroom 202");
 	rms[CLASSROOM202].exits_to_room[NORTH] = NONE;
-	rms[CLASSROOM202].exits_to_room[EAST] = NONE;
+	rms[CLASSROOM202].exits_to_room[EAST] = HALLWAY2;
 	rms[CLASSROOM202].exits_to_room[SOUTH] = NONE;
-	rms[CLASSROOM202].exits_to_room[WEST] = HALLWAY2;
+	rms[CLASSROOM202].exits_to_room[WEST] = NONE;
 
 	rms[CLASSROOM206].description.assign("Classroom 206");
 	rms[CLASSROOM206].exits_to_room[NORTH] = HALLWAY3;
@@ -113,9 +121,9 @@ void set_rooms(room *rms)
 
 	rms[CLASSROOM303].description.assign("Classroom 303");
 	rms[CLASSROOM303].exits_to_room[NORTH] = NONE;
-	rms[CLASSROOM303].exits_to_room[EAST] = NONE;
+	rms[CLASSROOM303].exits_to_room[EAST] = EAST;
 	rms[CLASSROOM303].exits_to_room[SOUTH] = NONE;
-	rms[CLASSROOM303].exits_to_room[WEST] = HALLWAY8;
+	rms[CLASSROOM303].exits_to_room[WEST] = NONE;
 
 	rms[CLASSROOM305].description.assign("Classroom 305");
 	rms[CLASSROOM305].exits_to_room[NORTH] = NONE;
@@ -125,9 +133,9 @@ void set_rooms(room *rms)
 
 	rms[CLASSROOM307].description.assign("Classroom 307");
 	rms[CLASSROOM307].exits_to_room[NORTH] = NONE;
-	rms[CLASSROOM307].exits_to_room[EAST] = NONE;
+	rms[CLASSROOM307].exits_to_room[EAST] = HALLWAY10;
 	rms[CLASSROOM307].exits_to_room[SOUTH] = NONE;
-	rms[CLASSROOM307].exits_to_room[WEST] = HALLWAY10;
+	rms[CLASSROOM307].exits_to_room[WEST] = NONE;
 
 	rms[KITCHEN].description.assign("Kitchen");
 	rms[KITCHEN].exits_to_room[NORTH] = NONE;
@@ -138,7 +146,7 @@ void set_rooms(room *rms)
 	rms[CAFETERIA].description.assign("Cafateria");
 	rms[CAFETERIA].exits_to_room[NORTH] = NONE;
 	rms[CAFETERIA].exits_to_room[EAST] = NONE;
-	rms[CAFETERIA].exits_to_room[SOUTH] = HALLWAY3;
+	rms[CAFETERIA].exits_to_room[SOUTH] = NONE;
 	rms[CAFETERIA].exits_to_room[WEST] = HALLWAY4;
 
 	rms[STOREROOM].description.assign("School Store Room");
@@ -276,7 +284,9 @@ void set_nouns(noun *nns)
 
 	//enum en_NOUNS {
 	//	JAN_CLOSET_DOOR, SCI_LAB_DOOR, CR202_DOOR, CAFETERIA_DOOR, KITCHEN_DOOR, SR_DOOR,
-	//	CR206_DOOR, CR307_DOOR, CR305_DOOR, CR301_DOOR, CR303_DOOR, MAGNET, METER, MONEY, TEXTBOOK};
+	//	CR206_DOOR, CR307_DOOR, CR305_DOOR, CR301_DOOR, CR303_DOOR, MAGNET, METER, MONEY,
+	//	TEXTBOOK, DESK, GYM_DOOR, IND_GRILL, LOCKER, TRAY, SIGN, COMPUTER, CHALKBOARD,
+	//	GLOBE, MERRYGOROUND, PROJECTOR};
 
 	nns[JAN_CLOSET_DOOR].word = "DOOR";
 	nns[JAN_CLOSET_DOOR].code = JAN_CLOSET_DOOR;
@@ -350,7 +360,7 @@ void set_nouns(noun *nns)
 	nns[CAFETERIA_DOOR].can_carry = false;
 	nns[CAFETERIA_DOOR].location = CAFETERIA;
 
-	//Using for story line, need more
+	//Using for story line
 	nns[MAGNET].word = "MAGNET";
 	nns[MAGNET].code = MAGNET;
 	nns[MAGNET].description = "A large magnet sits in the center of the room magnet.\nA hum is emanating from the magnet and all the metal objects in the room to be shifted twords the large magnet.\nThe purpose of such a large magnet is puzzling to you and why its running with no one watching it.";
@@ -365,7 +375,7 @@ void set_nouns(noun *nns)
 
 	nns[MONEY].word = "MONEY";
 	nns[MONEY].code = MONEY;
-	nns[MONEY].description = "A huge amount of money in various denominations lie in a pile in the corner. /nNever seen that before in a Janiators Closet.";
+	nns[MONEY].description = "A huge amount of money in various denominations lie in a pile in the corner. /nNever seen that before in a Janiators Closet. /nWhen you look at the bills closer they have people you've never seen before.";
 	nns[MONEY].can_carry = true;
 	nns[MONEY].location = JANIATORSCLOSET;
 
@@ -381,6 +391,59 @@ void set_nouns(noun *nns)
 	nns[DESK].can_carry = false;
 	nns[DESK].location = CLASSROOM206;
 
+	nns[IND_GRILL].word = "industrial grill";
+	nns[IND_GRILL].code = IND_GRILL;
+	nns[IND_GRILL].description = "A large industrial grill covers most of one wall in the kitchen. /nThe grill looks like it had caught fire as the entire thing looks like its been burned to a blackened hue. /nWhat went on here?";
+	nns[IND_GRILL].can_carry = false;
+	nns[IND_GRILL].location = KITCHEN;
+
+	nns[TRAY].word = "tray";
+	nns[TRAY].code = TRAY;
+	nns[TRAY].description = "The cafeteria is devoid of everything except one tray. /nThe floors seem to be spotless say that one solitary tray.";
+	nns[TRAY].can_carry = false;
+	nns[TRAY].location = CAFETERIA;
+
+	nns[LOCKER].word = "lockers";
+	nns[LOCKER].code = LOCKER;
+	nns[LOCKER].description = "The store room has a curious set of lockers along wall. /nThey have no names or markings on them to designate one from another. /nThey all look well used however all of them are identical down to the dent and scratch on them. /nIts like looking at multiple copies of the same locker.";
+	nns[LOCKER].can_carry = false;
+	nns[LOCKER].location = STOREROOM;
+
+	nns[SIGN].word = "sign";
+	nns[SIGN].code = SIGN;
+	nns[SIGN].description = "A small sign pointing down the hall way sits in the middle of the passage. /nIts the first thing you've seen with writing you understand. /nOn the sign you see a large arrow pointing down the hall. /nThat's pretty straight forward on what it wants you to do.";
+	nns[SIGN].can_carry = false;
+	nns[SIGN].location = HALLWAY1;
+
+	nns[COMPUTER].word = "computer";
+	nns[COMPUTER].code = COMPUTER;
+	nns[COMPUTER].description = "A solitary computer sits on a desk in the class room. /nThe computer looks ancient. Not something that has been seen in the last decade. /nUpon closer inspection the computer seems to be on and strange character scroll randomly across the screen.";
+	nns[COMPUTER].can_carry = false;
+	nns[COMPUTER].location = CLASSROOM301;
+
+	nns[CHALKBOARD].word = "chalkboard";
+	nns[CHALKBOARD].code = CHALKBOARD;
+	nns[CHALKBOARD].description = "A chalk board is placed against the wall in the back of the classroom. /nIt wasn't hung up but haphazardly thrown against the wall. /nMore of the strange language was quickly and roughly scrawled across the board.";
+	nns[CHALKBOARD].can_carry = false;
+	nns[CHALKBOARD].location = CLASSROOM303;
+
+	nns[GLOBE].word = "globe";
+	nns[GLOBE].code = GLOBE;
+	nns[GLOBE].description = "A familiar sight greets you on one of the desks. /nYou draw closer to the spherical shaped object and upon closer inspection you find that the globe's surface is unrecognizable to the one you know. /nAll the land masses and bodies of water are not where they are supposed to be. /nWhere am I?";
+	nns[GLOBE].can_carry = false; 
+	nns[GLOBE].location = CLASSROOM305;
+
+	nns[MERRYGOROUND].word = "merrygoround";
+	nns[MERRYGOROUND].code = MERRYGOROUND;
+	nns[MERRYGOROUND].description = "The most random thing you've seen since being in the strange school is sitting before you. /nA large Merry-Go-Round sits in the middle of the Gym floor. /nWhat on earth is that doing here?";
+	nns[MERRYGOROUND].can_carry = false;
+	nns[MERRYGOROUND].location = GYM;
+
+	nns[PROJECTOR].word = "projector";
+	nns[PROJECTOR].code = PROJECTOR;
+	nns[PROJECTOR].description = "The room is dark and a projector hums on the ceiling. /nIt projects more of the strange words on the wall. /nYou would think there would be something understandable by now.";
+	nns[PROJECTOR].can_carry = false;
+	nns[PROJECTOR].location = CLASSROOM307;
 }
 
 // -------------------------------------------------------------------------------------------------
@@ -393,6 +456,7 @@ void section_command(string Cmd, string &wd1, string &wd2)
 	char search = ' ';
 	size_t i, j;
 
+	//Split the command aprt and put into vectors
 	for (i = 0; i < Cmd.size(); i++)
 	{
 		if (Cmd.at(i) != search)
@@ -411,16 +475,8 @@ void section_command(string Cmd, string &wd1, string &wd2)
 		}
 	}
 
-	/*
-	for (i = words.size() - 1; i > 0; i--)
-	{
-		if (words.at(i) == "")
-		{
-			word.erase(word.begin() + i);
-		}
-	}
-	*/
-
+	
+	//Make words upper case
 	for (i = 0; i < words.size(); i++)
 	{
 		for (j = 0; j < words.at(i).size(); j++)
@@ -493,9 +549,6 @@ void examine_objects(int loc,  noun *nns)
 bool parser(int &loc, string wd1, string wd2, terms *dir, terms *vbs, room *rms, noun *nns)
 {
 	
-	
-
-
 	static bool door_state = false; //false is a closed door.
 
 	int i;
@@ -509,15 +562,6 @@ bool parser(int &loc, string wd1, string wd2, terms *dir, terms *vbs, room *rms,
 			{
 				loc = rms[loc].exits_to_room[dir[i].code];
 				cout << "I am now in " << rms[loc].description << "." << endl;
-
-				/*
-				//case for the gym to janiators closet door. will need to added for most of the other rooms
-				if (loc == JANIATORSCLOSET || loc == GYM)
-				{
-					nns[JAN_CLOSET_DOOR].location = loc;
-				}
-				*/
-
 				return true;
 			}
 			else
@@ -577,7 +621,7 @@ bool parser(int &loc, string wd1, string wd2, terms *dir, terms *vbs, room *rms,
 		return true;
 	}
 	
-	// Actions for usage of VERB OPEN
+	//actions for usage of VERB OPEN
 	//questions would need to be prompted in here I believe
 	if (VERB_ACTION == OPEN)
 	{
@@ -999,44 +1043,7 @@ bool parser(int &loc, string wd1, string wd2, terms *dir, terms *vbs, room *rms,
 		}
 
 	}
-		//close Do we need this? prob not but hey its here for one door
-		/*
-		if (VERB_ACTION == CLOSE)
-		{
-		if (NOUN_MATCH == HALLWAY11)
-		{
-		if (loc == HALLWAY11 || loc == JANIATORSCLOSET)
-		{
-		if (door_state == true)
-		{
-		door_state = true;
-		rms[HALLWAY11].exits_to_room[NORTH] = JANIATORSCLOSET;
-		rms[JANIATORSCLOSET].exits_to_room[SOUTH] = HALLWAY11;
-		nns[JAN_CLOSET_DOOR].description.clear();
-		nns[JAN_CLOSET_DOOR].description.assign("an open janiator's closet door");
-		cout << "I have opened the door." << endl;
-		return true;
-		}
-		else if (door_state == true)
-		{
-		cout << "The door is already closed." << endl;
-		return true;
-		}
-		}
-		else
-		{
-		cout << "There is no door to close here." << endl;
-		return true;
-		}
-		}
-		else
-		{
-		cout << "Closing that is not possible." << endl;
-		return true;
-		}
-		}
-		*/
-	
+		
 	return false;
 }
 
@@ -1098,6 +1105,7 @@ int main()
 				word_1.clear();
 				word_2.clear();
 
+				//call fpor the format fuction
 				section_command(command, word_1, word_2);
 
 				if (word_1 != "QUIT")
@@ -1120,3 +1128,12 @@ int main()
 
 	return 0;
 }
+
+/**************************************************************************************
+*Known issues: When the user is prompt for a question upon opening a door the program
+*acts as if there was an invalid command is given after the answering of a question 
+*Possible future functions: Pick up items, have an inventory to hold said items.
+*Link questions with spesific clues that could be found in each room. Would need to preload 
+*the question per room
+*
+**************************************************************************************/
